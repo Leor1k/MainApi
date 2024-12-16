@@ -23,9 +23,9 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.users_email == loginRequest.user_email);
+                .FirstOrDefaultAsync(u => u.users_email == loginRequest.username);
 
-            if (user == null || user.users_password != loginRequest.user_password)
+            if (user == null || user.users_password != loginRequest.password)
             {
                 return Unauthorized(new { message = "Invalid credentials" });
             }
