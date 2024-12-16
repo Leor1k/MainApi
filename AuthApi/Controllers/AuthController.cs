@@ -1,6 +1,10 @@
-﻿using AuthApi.Data;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using AuthApi.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AuthApi.Controllers
 {
@@ -19,26 +23,30 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.username == loginRequest.username && u.password == loginRequest.password);
+                .FirstOrDefaultAsync(u => u.users_email == loginRequest.user_email);
 
-            if (user == null)
+            if (user == null || user.users_password != loginRequest.user_password)
             {
                 return Unauthorized(new { message = "Invalid credentials" });
             }
-            return Ok(new { message = "Login successful" });
-        }
-        [HttpGet("users")]
-        public async Task<IActionResult> GetAllUsers()
-        {
-            var users = await _context.Users.ToListAsync(); // Получаем всех пользователей из базы данных
 
-            if (users == null || users.Count == 0)
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.UTF8.GetBytes("ТетраГидроКанабиноловаяЯмаЖаждаДозы");
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                return NotFound(new { message = "No users found" }); // Если пользователей нет
-            }
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.NameIdentifier, user.user_id.ToString()),
+                    new Claim(ClaimTypes.Email, user.users_email)
+                }),
+                Expires = DateTime.UtcNow.AddHours(1), // Время жизни токена
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
 
-            return Ok(users); // Возвращаем список пользователей
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
+
+            return Ok(new { token = tokenString });
         }
-
     }
 }

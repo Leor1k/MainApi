@@ -35,18 +35,6 @@
           }
         }
       }
-    },
-    "/api/Auth/users": {
-      "get": {
-        "tags": [
-          "Auth"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
     }
   },
   "components": {
@@ -54,11 +42,11 @@
       "UserLoginRequest": {
         "type": "object",
         "properties": {
-          "username": {
+          "user_email": {
             "type": "string",
             "nullable": true
           },
-          "password": {
+          "user_password": {
             "type": "string",
             "nullable": true
           }

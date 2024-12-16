@@ -12,7 +12,7 @@ namespace AuthApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Указываем имя таблицы с маленькими буквами
-            modelBuilder.Entity<User>().ToTable("users");
+            modelBuilder.Entity<User>().ToTable("\"Users\"");
         }
     }
 }

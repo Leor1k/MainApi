@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\AuthApi\\AuthApi\\AuthApi.csproj": {}
+    "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\AuthApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\AuthApi\\AuthApi\\AuthApi.csproj": {
+    "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\AuthApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\AuthApi\\AuthApi\\AuthApi.csproj",
+        "projectUniqueName": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\AuthApi.csproj",
         "projectName": "AuthApi",
-        "projectPath": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\AuthApi\\AuthApi\\AuthApi.csproj",
+        "projectPath": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\AuthApi.csproj",
         "packagesPath": "C:\\Users\\ProrokSamBoy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\AuthApi\\AuthApi\\obj\\",
+        "outputPath": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -57,6 +57,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.2, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.3.0, )"
             }
           },
           "imports": [
