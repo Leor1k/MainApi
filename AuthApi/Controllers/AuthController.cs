@@ -22,9 +22,8 @@ namespace AuthApi.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)
         {
-            // Обновляем запрос с правильным именем поля
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.users_email == loginRequest.username);
+                .FirstOrDefaultAsync(u => u.users_email == loginRequest.email);
 
             if (user == null || user.users_password != loginRequest.password)
             {

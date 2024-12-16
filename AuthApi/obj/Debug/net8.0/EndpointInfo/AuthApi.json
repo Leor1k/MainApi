@@ -42,11 +42,11 @@
       "UserLoginRequest": {
         "type": "object",
         "properties": {
-          "user_email": {
+          "email": {
             "type": "string",
             "nullable": true
           },
-          "user_password": {
+          "password": {
             "type": "string",
             "nullable": true
           }
