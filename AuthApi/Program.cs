@@ -12,7 +12,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Устанавливаем сервер на 0.0.0.0:5000
 app.Urls.Add("http://0.0.0.0:5000");
 
 if (app.Environment.IsDevelopment())
@@ -22,8 +21,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
-// Маршруты
 app.MapControllers();
 
 app.Run();
