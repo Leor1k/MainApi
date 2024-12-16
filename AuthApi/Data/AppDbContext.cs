@@ -11,7 +11,7 @@ namespace AuthApi.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().ToTable("Users");  // Используем кавычки для точного совпадения
+            modelBuilder.Entity<User>().ToTable("users");
 
         }
     }
