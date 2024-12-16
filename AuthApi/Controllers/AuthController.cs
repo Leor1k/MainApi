@@ -22,6 +22,7 @@ namespace AuthApi.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)
         {
+            // Обновляем запрос с правильным именем поля
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.users_email == loginRequest.username);
 
@@ -36,8 +37,8 @@ namespace AuthApi.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.user_id.ToString()),
-                    new Claim(ClaimTypes.Email, user.users_email)
+            new Claim(ClaimTypes.NameIdentifier, user.user_id.ToString()), // Используем user_id
+            new Claim(ClaimTypes.Email, user.users_email)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1), // Время жизни токена
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -48,5 +49,6 @@ namespace AuthApi.Controllers
 
             return Ok(new { token = tokenString });
         }
+
     }
 }
