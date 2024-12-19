@@ -70,6 +70,7 @@ namespace AuthApi.Controllers
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
+            Console.WriteLine("В базу внеслось, Письмо создаётся.");
             await SendConfirmationEmail(newUser.users_email, newUser.confirmationcode);
             return Ok(new { message = $"Для подтверждения регистрации, введите код высланный на {user.users_email}" });
         }
