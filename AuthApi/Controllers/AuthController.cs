@@ -64,13 +64,13 @@ namespace AuthApi.Controllers
             {
                 return Unauthorized(new { message = "Пользователь с таким Email уже существует" });
             }
-            newUser.confirmationCode = GenerateConfirmationCode();
-            newUser.createdAt = DateTime.UtcNow.AddHours(1);
-            newUser.isConfirmed = false;
+            newUser.confirmationcode = GenerateConfirmationCode();
+            newUser.createdat = DateTime.UtcNow.AddHours(1);
+            newUser.isconfirmed = false;
 
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            await SendConfirmationEmail(newUser.users_email, newUser.confirmationCode);
+            await SendConfirmationEmail(newUser.users_email, newUser.confirmationcode);
             return Ok(new { message = $"Для подтверждения регистрации, введите код высланный на {user.users_email}" });
         }
         public string GenerateConfirmationCode(int length = 6)
@@ -116,17 +116,17 @@ namespace AuthApi.Controllers
             {
                 return Unauthorized(new { message = "Пользователь не найден" });
             }
-            if (user.createdAt < DateTime.UtcNow)
+            if (user.createdat < DateTime.UtcNow)
             {
                 return Unauthorized(new { message = "Код подтверждения истек" });
             }
-            if (user.confirmationCode != confirmRequest.Code)
+            if (user.confirmationcode != confirmRequest.Code)
             {
                 return Unauthorized(new { message = "Неверный код подтверждения" });
             }
-            user.isConfirmed = true;
-            user.confirmationCode = null;
-            user.createdAt = null;
+            user.isconfirmed = true;
+            user.confirmationcode = null;
+            user.createdat = null;
             await _context.SaveChangesAsync();
             return Ok(new { message = "Почта успешно подтверждена" });
         }
