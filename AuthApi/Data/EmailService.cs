@@ -5,10 +5,10 @@
 
     public class EmailService
     {
-        private readonly string _smtpServer = "smtp.yandex.com"; // Замените на свой SMTP-сервер
-        private readonly int _smtpPort = 587; // Порт (обычно 587 для TLS)
-        private readonly string _email = "OctarineCore42@yandex.ru"; // Ваш email
-        private readonly string _password = "c/!{QOv\\\\L85qsT"; // Пароль от почты
+        private readonly string _smtpServer = "smtp.yandex.com"; 
+        private readonly int _smtpPort = 587; 
+        private readonly string _email = "OctarineCore42@yandex.ru"; 
+        private readonly string _password = "jhNz=t@DQGli8z"; 
 
         public async Task SendEmailAsync(string recipientEmail, string subject, string message)
         {
