@@ -9,7 +9,7 @@
 
         private readonly int _smtpPort = 465; 
         private readonly string _email = "OctarineCore42@yandex.ru"; 
-        private readonly string _password = "jhNz=t@DQGli8z"; 
+        private readonly string _password = "sjuhqjvcdcbhodqy"; 
 
         public async Task SendEmailAsync(string recipientEmail, string subject, string message)
         {
