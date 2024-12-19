@@ -64,7 +64,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Data\\EmailService.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Data\\EmailService.cs",
               "RelativeToolTip": "AuthApi\\Data\\EmailService.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-19T12:43:55.08Z",
               "EditorCaption": ""
@@ -91,8 +91,7 @@
               "RelativeToolTip": "AuthApi\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAIEAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-15T13:52:28.475Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-15T13:52:28.475Z"
             }
           ]
         }

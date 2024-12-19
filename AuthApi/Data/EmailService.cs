@@ -5,7 +5,8 @@
 
     public class EmailService
     {
-        private readonly string _smtpServer = "smtp.yandex.com"; 
+        private readonly string _smtpServer = "smtp.yandex.ru";
+
         private readonly int _smtpPort = 587; 
         private readonly string _email = "OctarineCore42@yandex.ru"; 
         private readonly string _password = "jhNz=t@DQGli8z"; 
