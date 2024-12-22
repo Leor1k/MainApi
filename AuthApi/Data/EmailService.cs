@@ -17,7 +17,7 @@
             email.From.Add(new MailboxAddress("Octarine Core", _email));
             email.To.Add(new MailboxAddress("", recipientEmail));
             email.Subject = subject;
-            email.Body = new TextPart("plain")
+            email.Body = new TextPart("html")
             {
                 Text = message
             };
