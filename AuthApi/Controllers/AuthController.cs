@@ -93,20 +93,43 @@ namespace AuthApi.Controllers
         string GenerateHtmlEmail(string confirmationCode)
         {
             return $@"
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <style>
-            /* Твой CSS */
-        </style>
-    </head>
-    <body>
-        <h1>Добро пожаловать в Octarine Core!</h1>
-        <p>Ваш код подтверждения: <b>{confirmationCode}</b></p>
-        <p>Введите его, чтобы завершить регистрацию (тут был ChatGPT).</p>
-    </body>
-    </html>";
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }}
+        h1 {{
+            color: #4CAF50;
+        }}
+        p {{
+            font-size: 16px;
+            color: #333;
+        }}
+        .confirmation-code {{
+            font-weight: bold;
+            font-size: 18px;
+            color: #4CAF50;
+        }}
+        .footer {{
+            font-size: 12px;
+            color: #777;
+        }}
+    </style>
+</head>
+<body>
+    <h1>Добро пожаловать в Octarine Core!</h1>
+    <p>Ваш код подтверждения: <span class='confirmation-code'>{confirmationCode}</span></p>
+    <p>Введите его, чтобы завершить регистрацию.</p>
+    <p class='footer'>Если вы не регистрировались, проигнорируйте это письмо.</p>
+</body>
+</html>";
         }
+
         [HttpPost("confirm")]
         public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmRequest confirmRequest)
         {
@@ -127,12 +150,8 @@ namespace AuthApi.Controllers
             }
             user.isconfirmed = true;
             user.confirmationcode = null;
-            user.createdat = null;
             await _context.SaveChangesAsync();
             return Ok(new { message = "Почта успешно подтверждена" });
         }
-
-
-
     }
 }

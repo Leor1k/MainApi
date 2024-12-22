@@ -11,16 +11,16 @@
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\data\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\confirmrequest .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\confirmrequest .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +34,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Program.cs",
               "RelativeDocumentMoniker": "AuthApi\\Program.cs",
@@ -42,19 +42,21 @@
               "RelativeToolTip": "AuthApi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T13:27:28.312Z"
+              "WhenOpened": "2024-12-19T13:27:28.312Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "ConfirmRequest .cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\ConfirmRequest .cs",
               "RelativeDocumentMoniker": "AuthApi\\Models\\ConfirmRequest .cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\ConfirmRequest .cs",
               "RelativeToolTip": "AuthApi\\Models\\ConfirmRequest .cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T13:13:18.79Z"
+              "WhenOpened": "2024-12-19T13:13:18.79Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -71,7 +73,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\User.cs",
               "RelativeDocumentMoniker": "AuthApi\\Models\\User.cs",
@@ -79,7 +81,8 @@
               "RelativeToolTip": "AuthApi\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T12:32:49.89Z"
+              "WhenOpened": "2024-12-19T12:32:49.89Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -89,7 +92,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAAEoAAAAAAAAAAAAiwEoAAABpAAAAAAAAAA==",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAAAJwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-15T13:52:28.475Z",
               "EditorCaption": ""
