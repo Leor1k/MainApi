@@ -8,7 +8,7 @@
     {
         private readonly string _smtpServer = "smtp.yandex.ru";
 
-        private readonly int _smtpPort = 465; 
+        private readonly int _smtpPort = 587; 
         private readonly string _email = "OctarineCore42@yandex.ru"; 
         private readonly string _password = "sjuhqjvcdcbhodqy"; 
 
@@ -33,7 +33,7 @@
             using (var smtpClient = new SmtpClient(new ProtocolLogger(Console.OpenStandardOutput())))
 
             {
-                await smtpClient.ConnectAsync(_smtpServer, _smtpPort, MailKit.Security.SecureSocketOptions.Auto);
+                await smtpClient.ConnectAsync(_smtpServer, _smtpPort, MailKit.Security.SecureSocketOptions.SslOnConnect);
                 Console.WriteLine("Создал конект");
                 await smtpClient.AuthenticateAsync(_email, _password);
                 Console.WriteLine("Аутендефецировал");
