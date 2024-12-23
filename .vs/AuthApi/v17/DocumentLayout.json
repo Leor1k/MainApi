@@ -72,8 +72,7 @@
               "RelativeToolTip": "AuthApi\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T11:51:48.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T11:51:48.244Z"
             },
             {
               "$type": "Document",
@@ -85,8 +84,7 @@
               "RelativeToolTip": "AuthApi\\Models\\FriendsRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T11:38:32.379Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T11:38:32.379Z"
             },
             {
               "$type": "Document",
@@ -98,8 +96,7 @@
               "RelativeToolTip": "AuthApi\\Models\\Friendships.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T11:08:57.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T11:08:57.462Z"
             },
             {
               "$type": "Document",
@@ -109,7 +106,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\FriendsController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\FriendsController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\FriendsController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAIwEYAAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T11:03:28.393Z",
               "EditorCaption": ""

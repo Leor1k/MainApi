@@ -14,7 +14,7 @@ namespace AuthApi.Controllers
         {
             _context = context;
         }
-        [HttpGet("{userId}/list)")]
+        [HttpGet("{userId}/list")]
         public async Task<ActionResult> GetFriends (int userIdIn)
         {
             var frieds = await _context.Friendships.Where(f => f.user_id == userIdIn && f.status == "В друзьях").Select(f => new
