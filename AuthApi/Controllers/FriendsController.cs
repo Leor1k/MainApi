@@ -17,9 +17,9 @@ namespace AuthApi.Controllers
         [HttpGet("{userId}/list)")]
         public async Task<ActionResult> GetFriends (int userIdIn)
         {
-            var frieds = await _context.Friendships.Where(f => f.user_Id == userIdIn && f.status == "Принятый").Select(f => new
+            var frieds = await _context.Friendships.Where(f => f.user_id == userIdIn && f.status == "Принятый").Select(f => new
             {
-                FriendId = f.friend_Id,
+                FriendId = f.friend_id,
                 FriendName = f.friend.users_name,
                 FriendStatus = "Не в сети"
             }).ToListAsync();
@@ -29,15 +29,15 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> SendFriendRequest(FriendsRequest request)
         {
             var existingRequest = await _context.Friendships
-                .FirstOrDefaultAsync(f => f.user_Id == request.UserId && f.friend_Id == request.FriendId);
+                .FirstOrDefaultAsync(f => f.user_id == request.UserId && f.friend_id == request.FriendId);
 
             if (existingRequest != null)
                 return BadRequest("Вы уже друзья!");
 
             var friendRequest = new Friendships
             {
-                user_Id = request.UserId,
-                friend_Id = request.FriendId,
+                user_id = request.UserId,
+                friend_id = request.FriendId,
                 status = "В процессе"
             };
 
@@ -50,7 +50,7 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> AcceptFriendRequest(FriendsRequest request)
         {
             var friendRequest = await _context.Friendships
-                .FirstOrDefaultAsync(f => f.user_Id == request.FriendId && f.friend_Id == request.UserId && f.status == "В процессе");
+                .FirstOrDefaultAsync(f => f.user_id == request.FriendId && f.friend_id == request.UserId && f.status == "В процессе");
 
             if (friendRequest == null)
                 return NotFound("Пользователя ненайдено");
@@ -60,8 +60,8 @@ namespace AuthApi.Controllers
 
             var reverseFriendship = new Friendships
             {
-                user_Id = request.UserId,
-                friend_Id = request.FriendId,
+                user_id = request.UserId,
+                friend_id = request.FriendId,
                 status = "Accepted"
             };
             _context.Friendships.Add(reverseFriendship);
@@ -74,8 +74,8 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> RemoveFriend(FriendsRequest request)
         {
             var friendships = await _context.Friendships
-                .Where(f => (f.user_Id == request.UserId && f.friend_Id == request.FriendId) ||
-                            (f.user_Id == request.FriendId && f.friend_Id == request.UserId))
+                .Where(f => (f.user_id == request.UserId && f.friend_id == request.FriendId) ||
+                            (f.user_id == request.FriendId && f.friend_id == request.UserId))
                 .ToListAsync();
 
             if (!friendships.Any())

@@ -8,10 +8,10 @@ namespace AuthApi.Models
         [Key]
         public int friendship_id { get; set; }
 
-        public int user_Id { get; set; }
+        public int user_id { get; set; }
 
-        [ForeignKey(nameof(friend_Id))]
-        public int friend_Id { get; set; }
+        [ForeignKey(nameof(friend_id))]
+        public int friend_id { get; set; }
 
         public string status { get; set; }
 
