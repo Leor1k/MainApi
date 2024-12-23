@@ -6,7 +6,7 @@ namespace AuthApi.Models
     public class Friendships
     {
         [Key]
-        public int friendship_Id { get; set; }
+        public int friendship_id { get; set; }
 
         public int user_Id { get; set; }
 
