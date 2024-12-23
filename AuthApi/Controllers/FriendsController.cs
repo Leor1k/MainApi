@@ -14,7 +14,7 @@ namespace AuthApi.Controllers
         {
             _context = context;
         }
-        [HttpGet("{userId}/list")]
+        [HttpGet("{userIdIn}/list")]
         public async Task<ActionResult> GetFriends(int userIdIn)
         {
             Console.WriteLine($"Запрос на друзей для пользователя с ID: {userIdIn}");
