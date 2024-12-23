@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Text;
 using AuthApi.Data;
 using AuthApi.Models;
-using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
