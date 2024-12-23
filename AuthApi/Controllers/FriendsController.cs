@@ -17,7 +17,7 @@ namespace AuthApi.Controllers
         [HttpGet("{userId}/list)")]
         public async Task<ActionResult> GetFriends (int userIdIn)
         {
-            var frieds = await _context.Friendships.Where(f => f.user_id == userIdIn && f.status == "Принятый").Select(f => new
+            var frieds = await _context.Friendships.Where(f => f.user_id == userIdIn && f.status == "В друзьях").Select(f => new
             {
                 FriendId = f.friend_id,
                 FriendName = f.friend.users_name,
@@ -38,7 +38,7 @@ namespace AuthApi.Controllers
             {
                 user_id = request.UserId,
                 friend_id = request.FriendId,
-                status = "В процессе"
+                status = "В ожидании ответа"
             };
 
             _context.Friendships.Add(friendRequest);
@@ -50,19 +50,19 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> AcceptFriendRequest(FriendsRequest request)
         {
             var friendRequest = await _context.Friendships
-                .FirstOrDefaultAsync(f => f.user_id == request.FriendId && f.friend_id == request.UserId && f.status == "В процессе");
+                .FirstOrDefaultAsync(f => f.user_id == request.FriendId && f.friend_id == request.UserId && f.status == "В ожидании ответа");
 
             if (friendRequest == null)
                 return NotFound("Пользователя ненайдено");
 
-            friendRequest.status = "Принятый";
+            friendRequest.status = "В друзьях";
             _context.Friendships.Update(friendRequest);
 
             var reverseFriendship = new Friendships
             {
                 user_id = request.UserId,
                 friend_id = request.FriendId,
-                status = "Accepted"
+                status = "В друзьях"
             };
             _context.Friendships.Add(reverseFriendship);
 
