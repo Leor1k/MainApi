@@ -23,7 +23,14 @@ namespace AuthApi.Controllers
                 FriendName = f.friend.users_name,
                 FriendStatus = "Не в сети"
             }).ToListAsync();
-            return Ok(frieds);
+            if (frieds.Count == 0)
+            {
+                return NotFound("У вас пока нет друзей");
+            }
+            else
+            {
+                return Ok(frieds);
+            }
         }
         [HttpPost("request/send")]
         public async Task<IActionResult> SendFriendRequest(FriendsRequest request)
