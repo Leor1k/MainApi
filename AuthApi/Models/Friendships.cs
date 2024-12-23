@@ -17,10 +17,10 @@ namespace AuthApi.Models
 
         public DateTime? created_at { get; set; } = DateTime.UtcNow;
 
-        [ForeignKey("user_Id")]
+        [ForeignKey("user_id")]
         public virtual User user { get; set; }
 
-        [ForeignKey("friend_Id")]
+        [ForeignKey("friend_id")]
         public virtual User friend { get; set; }
     }
 }
