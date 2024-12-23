@@ -15,7 +15,7 @@ namespace AuthApi.Models
 
         public string status { get; set; }
 
-        public DateTime? createdat { get; set; } = DateTime.UtcNow;
+        public DateTime? created_at { get; set; } = DateTime.UtcNow;
 
         [ForeignKey("user_Id")]
         public virtual User user { get; set; }
