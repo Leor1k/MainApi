@@ -42,8 +42,7 @@
               "RelativeToolTip": "AuthApi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T13:27:28.312Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T13:27:28.312Z"
             },
             {
               "$type": "Document",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "AuthApi\\Models\\ConfirmRequest .cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T13:13:18.79Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T13:13:18.79Z"
             },
             {
               "$type": "Document",
@@ -68,8 +66,7 @@
               "RelativeToolTip": "AuthApi\\Data\\EmailService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T12:43:55.08Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T12:43:55.08Z"
             },
             {
               "$type": "Document",
@@ -81,8 +78,7 @@
               "RelativeToolTip": "AuthApi\\Models\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-19T12:32:49.89Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-19T12:32:49.89Z"
             },
             {
               "$type": "Document",
@@ -92,7 +88,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAiwIIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAYwFUAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-15T13:52:28.475Z",
               "EditorCaption": ""

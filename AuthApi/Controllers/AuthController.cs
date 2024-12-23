@@ -69,23 +69,26 @@ namespace AuthApi.Controllers
             newUser.isconfirmed = false;
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            await SendCodeMail(newUser);
+            EmailAndCode email = new EmailAndCode();
+            email.Email = newUser.users_email;
+            await SendCodeMail(email);
             return Ok(new { message = $"Для подтверждения регистрации, введите код высланный на {newUser.users_email}" });
         }
         [HttpPost("send_code")]
-        public async Task<IActionResult> SendCodeMail ([FromBody] User enterUser)
+        public async Task<IActionResult> SendCodeMail([FromBody] EmailAndCode email)
         {
             var user = await _context.Users
-        .FirstOrDefaultAsync(u => u.users_email == enterUser.users_email);
+        .FirstOrDefaultAsync(u => u.users_email == email.Email);
             if (user == null)
             {
                 return Unauthorized(new { message = "Пользователя с таким Email не существует" });
             }
-            enterUser.confirmationcode = GenerateConfirmationCode();
+            user.confirmationcode = GenerateConfirmationCode();
+            user.createdat = DateTime.UtcNow.AddHours(1);
             _context.Update(user);
             await _context.SaveChangesAsync();
-            await SendConfirmationEmail(enterUser.users_email, enterUser.confirmationcode);
-            return Ok(new { message = $"Код подтвежденя выслан на {enterUser.users_email}" });
+            await SendConfirmationEmail(user.users_email, user.confirmationcode);
+            return Ok(new { message = $"Код подтвежденя выслан на {user.users_email}" });
         }
         public string GenerateConfirmationCode(int length = 6)
         {
