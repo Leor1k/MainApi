@@ -17,8 +17,9 @@ namespace AuthApi.Controllers
         [HttpGet("{userId}/list")]
         public async Task<ActionResult> GetFriends(int userIdIn)
         {
+            Console.WriteLine($"Запрос на друзей для пользователя с ID: {userIdIn}");
             var friends = await _context.Friendships
-                .Where(f => (f.user_id == userIdIn || f.friend_id == userIdIn) && f.status == "В друзьях")
+                .Where(f => (f.user_id == userIdIn || f.friend_id == userIdIn) && f.status.Trim() == "В друзьях")
                 .Select(f => new
                 {
                     FriendId = f.user_id == userIdIn ? f.friend_id : f.user_id,
