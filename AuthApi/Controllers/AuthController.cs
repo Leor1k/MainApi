@@ -67,12 +67,25 @@ namespace AuthApi.Controllers
             newUser.confirmationcode = GenerateConfirmationCode();
             newUser.createdat = DateTime.UtcNow.AddHours(1);
             newUser.isconfirmed = false;
-
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
-            Console.WriteLine("В базу внеслось, Письмо создаётся.");
-            await SendConfirmationEmail(newUser.users_email, newUser.confirmationcode);
+            await SendCodeMail(newUser);
             return Ok(new { message = $"Для подтверждения регистрации, введите код высланный на {newUser.users_email}" });
+        }
+        [HttpPost("send_code")]
+        public async Task<IActionResult> SendCodeMail ([FromBody] User enterUser)
+        {
+            var user = await _context.Users
+        .FirstOrDefaultAsync(u => u.users_email == enterUser.users_email);
+            if (user == null)
+            {
+                return Unauthorized(new { message = "Пользователя с таким Email не существует" });
+            }
+            enterUser.confirmationcode = GenerateConfirmationCode();
+            _context.Update(user);
+            await _context.SaveChangesAsync();
+            await SendConfirmationEmail(enterUser.users_email, enterUser.confirmationcode);
+            return Ok(new { message = $"Код подтвежденя выслан на {enterUser.users_email}" });
         }
         public string GenerateConfirmationCode(int length = 6)
         {
@@ -153,5 +166,6 @@ namespace AuthApi.Controllers
             await _context.SaveChangesAsync();
             return Ok(new { message = "Почта успешно подтверждена" });
         }
+
     }
 }
