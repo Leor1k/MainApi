@@ -15,23 +15,28 @@ namespace AuthApi.Controllers
             _context = context;
         }
         [HttpGet("{userId}/list")]
-        public async Task<ActionResult> GetFriends (int userIdIn)
+        public async Task<ActionResult> GetFriends(int userIdIn)
         {
-            var frieds = await _context.Friendships.Where(f => f.user_id == userIdIn && f.status == "В друзьях").Select(f => new
+            var friends = await _context.Friendships
+                .Where(f => (f.user_id == userIdIn || f.friend_id == userIdIn) && f.status == "В друзьях")
+                .Select(f => new
+                {
+                    FriendId = f.user_id == userIdIn ? f.friend_id : f.user_id,
+                    FriendName = f.user_id == userIdIn ? f.friend.users_name : f.user.users_name,
+                    FriendStatus = "Не в сети"
+                })
+                .ToListAsync();
+
+            if (friends.Count == 0)
             {
-                FriendId = f.friend_id,
-                FriendName = f.friend.users_name,
-                FriendStatus = "Не в сети"
-            }).ToListAsync();
-            if (frieds.Count == 0)
-            {
-                return NotFound("У вас пока нет друзей");
+                return NotFound("У вас пока нет друзей....");
             }
             else
             {
-                return Ok(frieds);
+                return Ok(friends);
             }
         }
+
         [HttpPost("request/send")]
         public async Task<IActionResult> SendFriendRequest(FriendsRequest request)
         {
