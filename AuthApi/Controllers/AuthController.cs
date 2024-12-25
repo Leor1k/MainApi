@@ -43,8 +43,8 @@ namespace AuthApi.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
             new Claim(ClaimTypes.NameIdentifier, user.user_id.ToString()),
-            new Claim(ClaimTypes.Email, user.users_email)
-                }),
+            new Claim(ClaimTypes.Email, user.users_email),
+            new Claim("users_name", user.users_name)                }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
