@@ -26,6 +26,7 @@ namespace AuthApi.Controllers
                     FriendName = f.user_id == userIdIn ? f.friend.users_name : f.user.users_name,
                     FriendStatus = "Не в сети"
                 })
+                 .Distinct()
                 .ToListAsync();
 
             if (friends.Count == 0)
