@@ -7,6 +7,18 @@
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\friendships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\friendships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\friendsrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\friendsrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -17,18 +29,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\friendsrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\friendsrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\friendships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\friendships.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +42,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Program.cs",
               "RelativeDocumentMoniker": "AuthApi\\Program.cs",
@@ -61,14 +61,14 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwCwAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAowDEAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-25T15:30:17.187Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "EmailService.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Data\\EmailService.cs",
               "RelativeDocumentMoniker": "AuthApi\\Data\\EmailService.cs",
@@ -80,7 +80,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "AuthApi\\Data\\AppDbContext.cs",
@@ -88,12 +88,11 @@
               "RelativeToolTip": "AuthApi\\Data\\AppDbContext.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T11:51:48.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-23T11:51:48.244Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "FriendsRequest.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\FriendsRequest.cs",
               "RelativeDocumentMoniker": "AuthApi\\Models\\FriendsRequest.cs",
@@ -105,27 +104,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Friendships.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\Friendships.cs",
               "RelativeDocumentMoniker": "AuthApi\\Models\\Friendships.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\Friendships.cs",
               "RelativeToolTip": "AuthApi\\Models\\Friendships.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-23T11:08:57.462Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "FriendsController.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\FriendsController.cs",
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\FriendsController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\FriendsController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\FriendsController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBAAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAQwB4AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-23T11:03:28.393Z"
+              "WhenOpened": "2024-12-23T11:03:28.393Z",
+              "EditorCaption": ""
             }
           ]
         }
