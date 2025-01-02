@@ -100,19 +100,36 @@ namespace AuthApi.Controllers
 
             return Ok("Вы больше не друзья....");
         }
-        [HttpGet("id")]
-        public async Task<IActionResult> SeatchUserById(UserByIdRequest request)
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchUsersByIds([FromQuery] int currentUserId, [FromQuery] List<int> userIds)
         {
-            var user = await _context.Users
-                .Where(u => u.user_id == request.IdUser)
-                .Select(u => new FriendDTO { Id = u.user_id, Name = u.users_name, Status = "не в сети"})
-                .FirstOrDefaultAsync();
+            // Получение списка друзей текущего пользователя
+            var friendsIds = await _context.Friendships
+                .Where(f => f.user_id == currentUserId || f.friend_id == currentUserId)
+                .Select(f => f.user_id == currentUserId ? f.friend_id : f.user_id)
+                .ToListAsync();
 
-            if (user == null)
-                return NotFound("Пользователь не найден");
+            // Фильтрация пользователей: исключаем самого себя и друзей
+            var users = await _context.Users
+                .Where(u => userIds.Contains(u.user_id) &&
+                            u.user_id != currentUserId &&
+                            !friendsIds.Contains(u.user_id))
+                .Select(u => new FriendDTO
+                {
+                    Id = u.user_id,
+                    Name = u.users_name,
+                    Status = "не в сети"
+                })
+                .ToListAsync();
 
-            return Ok(user);
+            if (!users.Any())
+            {
+                return NotFound("Пользователи не найдены.");
+            }
+
+            return Ok(users);
         }
+
 
     }
 }
