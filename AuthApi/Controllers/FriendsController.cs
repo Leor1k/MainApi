@@ -100,5 +100,19 @@ namespace AuthApi.Controllers
 
             return Ok("Вы больше не друзья....");
         }
+        [HttpGet("id")]
+        public async Task<IActionResult> SeatchUserById(UserByIdRequest request)
+        {
+            var user = await _context.Users
+                .Where(u => u.user_id == request.IdUser)
+                .Select(u => new FriendDTO { Id = u.user_id, Name = u.users_name })
+                .FirstOrDefaultAsync();
+
+            if (user == null)
+                return NotFound("Пользователь не найден");
+
+            return Ok(user);
+        }
+
     }
 }
