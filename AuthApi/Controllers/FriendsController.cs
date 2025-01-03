@@ -103,13 +103,11 @@ namespace AuthApi.Controllers
         [HttpGet("search")]
         public async Task<IActionResult> SearchUsersByIds([FromQuery] int currentUserId, [FromQuery] List<int> userIds)
         {
-            // Получение списка друзей текущего пользователя
             var friendsIds = await _context.Friendships
                 .Where(f => f.user_id == currentUserId || f.friend_id == currentUserId)
                 .Select(f => f.user_id == currentUserId ? f.friend_id : f.user_id)
                 .ToListAsync();
 
-            // Фильтрация пользователей: исключаем самого себя и друзей
             var users = await _context.Users
                 .Where(u => userIds.Contains(u.user_id) &&
                             u.user_id != currentUserId &&
@@ -128,6 +126,24 @@ namespace AuthApi.Controllers
             }
 
             return Ok(users);
+        }
+        [HttpGet("friend-requests")]
+        public async Task<IActionResult> GetFriendRequests(int userId)
+        {
+            var friendRequests = await _context.Friendships
+                .Where(f => f.friend_id == userId && f.status == "В ожидании ответа")
+                .Select(f => new
+                {
+                    FriendshipId = f.friendship_id,
+                    UserId = f.user_id,
+                    UserName = f.user.users_name 
+                })
+                .ToListAsync();
+
+            if (!friendRequests.Any())
+                return NotFound("Нет заявок в друзья.");
+
+            return Ok(friendRequests);
         }
 
 

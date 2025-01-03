@@ -169,5 +169,6 @@ namespace AuthApi.Controllers
             return Ok(new { message = "Почта успешно подтверждена" });
         }
 
+
     }
 }
