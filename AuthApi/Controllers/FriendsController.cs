@@ -134,7 +134,7 @@ namespace AuthApi.Controllers
                 .Where(f => f.friend_id == userId && f.status == "В ожидании ответа")
                 .Select(f => new
                 {
-                    FriendshipId = f.friendship_id,
+                    FriendId = f.friend_id,
                     UserId = f.user_id,
                     UserName = f.user.users_name 
                 })
