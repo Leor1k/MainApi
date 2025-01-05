@@ -16,7 +16,7 @@ namespace AuthApi.Data
         {
             modelBuilder.Entity<User>().ToTable("users");
             modelBuilder.Entity<Friendships>().ToTable("friendships");
-            modelBuilder.Entity<Chat>().ToTable("chat");
+            modelBuilder.Entity<Chat>().ToTable("chats");
             modelBuilder.Entity<ChatParticipant>().ToTable("chatparticipants");
         }
     }
