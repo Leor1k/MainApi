@@ -1,5 +1,7 @@
 ﻿using AuthApi.Data;
 using AuthApi.Models;
+using AuthApi.Models.Requests;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -47,6 +49,58 @@ namespace AuthApi.Controllers
             await _context.SaveChangesAsync();
             return Ok(chat);
         }
+        [HttpPost("send-message")]
+        public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request, [FromServices] IHubContext<ChatHub> chatHub)
+        {
+            if (string.IsNullOrWhiteSpace(request.Content))
+                return BadRequest("Сообщение не может быть пустым.");
+
+            var chat = await _context.Chats.FindAsync(request.ChatId);
+            if (chat == null)
+                return NotFound("Чат не найден.");
+
+            var isParticipant = await _context.ChatParticipants
+                .AnyAsync(p => p.chatid == request.ChatId && p.userid == request.SenderId);
+
+            if (!isParticipant)
+                return Forbid("Вы не являетесь участником данного чата.");
+
+            // Создаем сообщение
+            var message = new Messages
+            {
+                chatid = request.ChatId,
+                senderid = request.SenderId,
+                content = request.Content,
+                createdat = DateTime.UtcNow
+            };
+
+            _context.Messagess.Add(message);
+            await _context.SaveChangesAsync();
+
+            await chatHub.Clients.Group(request.ChatId.ToString())
+                .SendMessage("ReceiveMessage", message);
+
+            return Ok(message);
+        }
+
+        [HttpGet("get-messages")]
+        public async Task<IActionResult> GetMessages([FromQuery] GetMessagesRequest request)
+        {
+            var isParticipant = await _context.ChatParticipants
+                .AnyAsync(p => p.chatid == request.ChatId && p.userid == request.UserId);
+
+            if (!isParticipant)
+                return Forbid("Вы не являетесь участником данного чата.");
+
+            var messages = await _context.Messagess
+                .Where(m => m.chatid == request.ChatId)
+                .OrderBy(m => m.createdat)
+                .ToListAsync();
+
+            return Ok(messages);
+        }
+
+
 
 
     }

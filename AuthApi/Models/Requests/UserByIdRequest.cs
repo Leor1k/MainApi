@@ -1,4 +1,4 @@
-﻿namespace AuthApi.Models
+﻿namespace AuthApi.Models.Requests
 {
     public class UserByIdRequest
     {

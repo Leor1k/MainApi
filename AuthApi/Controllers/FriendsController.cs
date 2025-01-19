@@ -1,5 +1,6 @@
 ﻿using AuthApi.Data;
 using AuthApi.Models;
+using AuthApi.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,15 +1,17 @@
 ﻿using AuthApi.Data;
+using Microsoft.AspNet.SignalR.WebSockets;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Добавляем сервисы
+// Регистрация сервисов
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<EmailService>();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -23,5 +25,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthorization();
 app.MapControllers();
+
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapHub<ChatHub>("/chatHub");
+});
+
 
 app.Run();

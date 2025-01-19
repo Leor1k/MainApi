@@ -11,6 +11,7 @@ namespace AuthApi.Data
         public DbSet<Friendships> Friendships { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<ChatParticipant> ChatParticipants { get; set; }
+        public DbSet<Messages> Messagess { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -18,6 +19,8 @@ namespace AuthApi.Data
             modelBuilder.Entity<Friendships>().ToTable("friendships");
             modelBuilder.Entity<Chat>().ToTable("chats");
             modelBuilder.Entity<ChatParticipant>().ToTable("chatparticipants");
+            modelBuilder.Entity<Messages>().ToTable("messages");
+
         }
     }
 }
