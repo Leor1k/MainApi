@@ -1,10 +1,8 @@
 ﻿using AuthApi.Data;
-using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Регистрация сервисов
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
@@ -23,14 +21,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseRouting(); 
+app.UseRouting(); // Важно добавить вызов UseRouting
 
 app.UseAuthorization();
+
+// Маршрутизация для контроллеров
 app.MapControllers();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<ChatHub>("/chatHub");
-});
+// Маршрут для SignalR
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();

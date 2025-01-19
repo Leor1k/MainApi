@@ -36,7 +36,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Program.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Program.cs",
               "RelativeToolTip": "AuthApi\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAD4vx4AAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-19T10:44:19.827Z",
               "EditorCaption": ""
@@ -63,8 +63,7 @@
               "RelativeToolTip": "AuthApi\\Models\\WebSockets\\ChatHub.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-16T10:52:38.271Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-16T10:52:38.271Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "AuthApi\\Controllers\\ChatsController.cs",
               "ViewState": "AgIAAEIAAAAAAAAAAAAwwEwAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-05T11:22:26.737Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-05T11:22:26.737Z"
             }
           ]
         }
