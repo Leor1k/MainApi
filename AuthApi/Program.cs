@@ -23,14 +23,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting(); 
+
 app.UseAuthorization();
 app.MapControllers();
-
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapHub<ChatHub>("/chatHub");
 });
-
 
 app.Run();
