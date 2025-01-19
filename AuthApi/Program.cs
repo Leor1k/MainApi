@@ -1,5 +1,5 @@
 ﻿using AuthApi.Data;
-using Microsoft.AspNet.SignalR.WebSockets;
+using Microsoft.AspNetCore.WebSockets;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

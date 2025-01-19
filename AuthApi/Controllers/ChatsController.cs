@@ -1,8 +1,8 @@
 ﻿using AuthApi.Data;
 using AuthApi.Models;
 using AuthApi.Models.Requests;
-using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthApi.Controllers
@@ -78,7 +78,7 @@ namespace AuthApi.Controllers
             await _context.SaveChangesAsync();
 
             await chatHub.Clients.Group(request.ChatId.ToString())
-                .SendMessage("ReceiveMessage", message);
+                .SendAsync("ReceiveMessage", message);
 
             return Ok(message);
         }
