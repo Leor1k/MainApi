@@ -86,7 +86,8 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> GetMessages([FromQuery] GetMessagesRequest request)
         {
             var isParticipant = await _context.ChatParticipants
-                .AnyAsync(p => p.chatid == request.ChatId && p.userid == request.UserId);
+     .AnyAsync(p => p.chatid.ToString() == request.ChatId.ToString() &&
+                    p.userid.ToString() == request.UserId.ToString());
 
             if (!isParticipant)
                 return StatusCode(StatusCodes.Status403Forbidden, "Вы не являетесь участником данного чата.");
