@@ -65,7 +65,6 @@ namespace AuthApi.Controllers
             if (!isParticipant)
                 return Forbid("Вы не являетесь участником данного чата.");
 
-            // Создаем сообщение
             var message = new Messages
             {
                 chatid = request.ChatId,
@@ -90,7 +89,7 @@ namespace AuthApi.Controllers
                 .AnyAsync(p => p.chatid == request.ChatId && p.userid == request.UserId);
 
             if (!isParticipant)
-                return Forbid("Вы не являетесь участником данного чата.");
+                return StatusCode(StatusCodes.Status403Forbidden, "Вы не являетесь участником данного чата.");
 
             var messages = await _context.Messagess
                 .Where(m => m.chatid == request.ChatId)
@@ -99,9 +98,5 @@ namespace AuthApi.Controllers
 
             return Ok(messages);
         }
-
-
-
-
     }
 }
