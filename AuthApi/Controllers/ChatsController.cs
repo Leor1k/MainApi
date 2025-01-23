@@ -83,7 +83,7 @@ namespace AuthApi.Controllers
         }
 
         [HttpGet("get-messages")]
-        public async Task<IActionResult> GetMessages([FromQuery] GetMessagesRequest request)
+        public async Task<IActionResult> GetMessages([FromBody] GetMessagesRequest request)
         {
             var isParticipant = await _context.ChatParticipants
      .AnyAsync(p => p.chatid == request.ChatId && p.userid == request.UserId);
