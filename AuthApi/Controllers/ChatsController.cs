@@ -82,17 +82,18 @@ namespace AuthApi.Controllers
             return Ok(message);
         }
 
-        [HttpGet("get-messages")]
-        public async Task<IActionResult> GetMessages([FromBody] GetMessagesRequest request)
+        //[HttpGet("{userIdIn}/list")]
+        [HttpGet("get-messages/{ChatId}/{UserId}")]
+        public async Task<ActionResult> GetUsersList (int ChatId, int UserId)
         {
             var isParticipant = await _context.ChatParticipants
-     .AnyAsync(p => p.chatid == request.ChatId && p.userid == request.UserId);
-            Console.WriteLine($"ID user: {request.UserId}\nId chat {request.ChatId}");
+     .AnyAsync(p => p.chatid == ChatId && p.userid == UserId);
+            Console.WriteLine($"ID user: {UserId}\nId chat {ChatId}");
             if (!isParticipant)
                 return StatusCode(StatusCodes.Status403Forbidden, "Вы не являетесь участником данного чата.");
 
             var messages = await _context.Messagess
-                .Where(m => m.chatid == request.ChatId)
+                .Where(m => m.chatid == ChatId)
                 .OrderBy(m => m.createdat)
                 .ToListAsync();
 
