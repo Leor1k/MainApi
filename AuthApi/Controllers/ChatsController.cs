@@ -82,18 +82,25 @@ namespace AuthApi.Controllers
             return Ok(message);
         }
 
-        //[HttpGet("{userIdIn}/list")]
-        [HttpGet("get-messages/{ChatId}/{UserId}")]
-        public async Task<ActionResult> GetUsersList (int ChatId, int UserId)
+        [HttpGet("get-messages/{UserId}/{FriendId}")]
+        public async Task<ActionResult> GetUsersList(int UserId, int FriendId)
         {
-            var isParticipant = await _context.ChatParticipants
-     .AnyAsync(p => p.chatid == ChatId && p.userid == UserId);
-            Console.WriteLine($"ID user: {UserId}\nId chat {ChatId}");
-            if (!isParticipant)
-                return StatusCode(StatusCodes.Status403Forbidden, "Вы не являетесь участником данного чата.");
+            var chat = await _context.Chats
+                .Join(_context.ChatParticipants, c => c.chatid, cp => cp.chatid, (c, cp) => new { Chat = c, Participant = cp })
+                .Where(c => c.Participant.userid == UserId || c.Participant.userid == FriendId)
+                .Join(_context.ChatParticipants, c => c.Chat.chatid, cp => cp.chatid, (c, cp) => new { Chat = c.Chat, Participant = cp })
+                .Where(c => c.Participant.userid == FriendId || c.Participant.userid == UserId)
+                .Select(c => c.Chat)
+                .FirstOrDefaultAsync();
 
+            if (chat == null)
+            {
+                return NotFound("Не найден приватный чат между указанными пользователями.");
+            }
+
+            // Получаем сообщения из найденного чата
             var messages = await _context.Messagess
-                .Where(m => m.chatid == ChatId)
+                .Where(m => m.chatid == chat.chatid)
                 .OrderBy(m => m.createdat)
                 .ToListAsync();
 
