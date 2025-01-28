@@ -106,6 +106,7 @@ namespace AuthApi.Controllers
 
             return Ok(messages);
         }
+        [HttpGet("get-chats/{UserId}")]
         public async Task<ActionResult> GetUsersChats(int UserId)
         {
             var chats = await _context.ChatParticipants
