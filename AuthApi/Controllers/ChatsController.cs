@@ -106,7 +106,6 @@ namespace AuthApi.Controllers
 
             return Ok(messages);
         }
-        [HttpGet("get-chats/{UserId}")]
         public async Task<ActionResult> GetUsersChats(int UserId)
         {
             var chats = await _context.ChatParticipants
@@ -119,7 +118,19 @@ namespace AuthApi.Controllers
                     (cp, m) => new { cp.chatid, m.LastMessageTime }
                 )
                 .OrderByDescending(c => c.LastMessageTime)
-                .Select(c => c.chatid)
+                .Select(c => new
+                {
+                    ChatId = c.chatid,
+                    Participants = _context.ChatParticipants
+                        .Where(cp => cp.chatid == c.chatid)
+                        .Join(
+                            _context.Users,
+                            cp => cp.userid,
+                            u => u.user_id,
+                            (cp, u) => new { u.user_id, u.users_name }
+                        )
+                        .ToList()
+                })
                 .ToListAsync();
 
             if (chats == null || chats.Count == 0)
@@ -129,6 +140,7 @@ namespace AuthApi.Controllers
 
             return Ok(chats);
         }
+
 
     }
 }
