@@ -106,5 +106,29 @@ namespace AuthApi.Controllers
 
             return Ok(messages);
         }
+        [HttpGet("get-chats/{UserId}")]
+        public async Task<ActionResult> GetUsersChats(int UserId)
+        {
+            var chats = await _context.ChatParticipants
+                .Where(cp => cp.userid == UserId)
+                .Join(
+                    _context.Messagess.GroupBy(m => m.chatid)
+                        .Select(g => new { ChatId = g.Key, LastMessageTime = g.Max(m => m.createdat) }),
+                    cp => cp.chatid,
+                    m => m.ChatId,
+                    (cp, m) => new { cp.chatid, m.LastMessageTime }
+                )
+                .OrderByDescending(c => c.LastMessageTime)
+                .Select(c => c.chatid)
+                .ToListAsync();
+
+            if (chats == null || chats.Count == 0)
+            {
+                return NotFound("Чаты не найдены");
+            }
+
+            return Ok(chats);
+        }
+
     }
 }
