@@ -1,5 +1,6 @@
 ﻿using AuthApi.Models;
 using Microsoft.AspNetCore.SignalR;
+using System.Threading.Tasks;
 
 public class ChatHub : Hub
 {
@@ -23,9 +24,11 @@ public class ChatHub : Hub
         }
         await base.OnDisconnectedAsync(exception);
     }
-    public async Task SendMessage(string userId, Messages message)
+
+    // Этот метод вызывается из клиента через SignalR
+    public async Task SendMessageToUser(string userId, Messages message)
     {
         await Clients.User(userId).SendAsync("ReceiveMessage", message);
-        Console.WriteLine("////////////////////\nSendMessage в ChutHub\n////////////////////");
+        Console.WriteLine("////////////////////\nSendMessageToUser в ChatHub\n////////////////////");
     }
 }

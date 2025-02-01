@@ -53,6 +53,7 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request, [FromServices] IHubContext<ChatHub> chatHub)
         {
             Console.WriteLine("////////////////////\nПрилетело в API\n////////////////////");
+
             if (string.IsNullOrWhiteSpace(request.Content))
                 return BadRequest("Сообщение не может быть пустым.");
 
@@ -77,6 +78,7 @@ namespace AuthApi.Controllers
             _context.Messagess.Add(message);
             await _context.SaveChangesAsync();
 
+            // Отправляем сообщение через SignalR
             await chatHub.Clients.Group(request.ChatId.ToString())
                 .SendAsync("ReceiveMessage", message);
 
