@@ -11,6 +11,7 @@ public class ChatHub : Hub
             await Groups.AddToGroupAsync(Context.ConnectionId, userId);
         }
         await base.OnConnectedAsync();
+        Console.WriteLine("////////////////////\nOnConnectedAsync\n////////////////////");
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception)
@@ -25,5 +26,6 @@ public class ChatHub : Hub
     public async Task SendMessage(string userId, Messages message)
     {
         await Clients.User(userId).SendAsync("ReceiveMessage", message);
+        Console.WriteLine("////////////////////\nSendMessage в ChutHub\n////////////////////");
     }
 }

@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\controllers\\chatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\chatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\websockets\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\websockets\\chathub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\messages .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\messages .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\friendscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\controllers\\chatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\controllers\\chatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,23 +26,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "ChatHub.cs",
+              "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\WebSockets\\ChatHub.cs",
+              "RelativeDocumentMoniker": "AuthApi\\Models\\WebSockets\\ChatHub.cs",
+              "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\WebSockets\\ChatHub.cs",
+              "RelativeToolTip": "AuthApi\\Models\\WebSockets\\ChatHub.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-01T10:38:18.231Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "FriendsController.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\FriendsController.cs",
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\FriendsController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\FriendsController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\FriendsController.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwBgAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAACEAAAAAAAAAAAAowBgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-26T12:23:11.945Z"
+              "WhenOpened": "2025-01-26T12:23:11.945Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Messages .cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\Messages .cs",
               "RelativeDocumentMoniker": "AuthApi\\Models\\Messages .cs",
@@ -46,17 +64,18 @@
               "RelativeToolTip": "AuthApi\\Models\\Messages .cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-23T13:55:09.934Z"
+              "WhenOpened": "2025-01-23T13:55:09.934Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "ChatsController.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\ChatsController.cs",
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\ChatsController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\ChatsController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\ChatsController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAiwGUAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAwwFQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-05T11:22:26.737Z",
               "EditorCaption": ""
