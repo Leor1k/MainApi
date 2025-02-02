@@ -10,6 +10,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<EmailService>();
 builder.Services.AddSignalR();
+builder.Host.ConfigureLogging(opt =>
+{
+    opt.AddFilter("Microsoft.EntityFrameworkCore.Database.Command", LogLevel.Warning);
+    opt.AddFilter("Microsoft.EntityFrameworkCore", LogLevel.Warning);
+});
+
 
 var app = builder.Build();
 

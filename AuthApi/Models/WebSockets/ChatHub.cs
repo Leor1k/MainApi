@@ -31,10 +31,18 @@ public class ChatHub : Hub
         await base.OnDisconnectedAsync(exception);
     }
 
-    // Метод для отправки сообщения конкретному пользователю
     public async Task SendMessageToUser(string receiverUserId, Messages message)
     {
-        await Clients.Group(receiverUserId).SendAsync("ReceiveMessage", message);
-        Console.WriteLine($"Сообщение отправлено пользователю {receiverUserId}");
+        var groupClients = Clients.Group(receiverUserId);
+        if (groupClients != null)
+        {
+            await groupClients.SendAsync("ReceiveMessage", message);
+            Console.WriteLine($"Сообщение отправлено пользователю {receiverUserId}");
+        }
+        else
+        {
+            Console.WriteLine($"Нет подключений для пользователя {receiverUserId}");
+        }
+
     }
 }
