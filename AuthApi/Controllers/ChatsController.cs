@@ -52,6 +52,7 @@ namespace AuthApi.Controllers
         [HttpPost("send-message")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request, [FromServices] IHubContext<ChatHub> chatHub)
         {
+            Console.Clear();
             Console.WriteLine("////////////////////\nПрилетело в API\n////////////////////");
 
             if (string.IsNullOrWhiteSpace(request.Content))
