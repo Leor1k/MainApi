@@ -52,7 +52,6 @@ namespace AuthApi.Controllers
         [HttpPost("send-message")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request, [FromServices] IHubContext<ChatHub> chatHub)
         {
-            Console.Clear();
             Console.WriteLine("////////////////////\nПрилетело в API\n////////////////////");
 
             if (string.IsNullOrWhiteSpace(request.Content))
@@ -79,10 +78,9 @@ namespace AuthApi.Controllers
             _context.Messagess.Add(message);
             await _context.SaveChangesAsync();
 
-            // Отправляем сообщение через SignalR
-            await chatHub.Clients.Group(request.ChatId.ToString())
+            // Отправляем сообщение в группу получателя
+            await chatHub.Clients.Group(request.ReceiverId.ToString())
                 .SendAsync("ReceiveMessage", message);
-            Console.WriteLine($"\n////////////////////\nОтправленно в группу {request.ChatId}\n////////////////////\n");
 
             return Ok(message);
         }
