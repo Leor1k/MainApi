@@ -6,13 +6,13 @@ public class ChatHub : Hub
 {
     public override async Task OnConnectedAsync()
     {
-        var userId = Context.UserIdentifier;
-        if (userId != null)
+        var chatId = Context.GetHttpContext().Request.Query["chatId"];
+        if (!string.IsNullOrEmpty(chatId))
         {
-            await Groups.AddToGroupAsync(Context.ConnectionId, userId);
+            await Groups.AddToGroupAsync(Context.ConnectionId, chatId);
         }
         await base.OnConnectedAsync();
-        Console.WriteLine("////////////////////\nOnConnectedAsync\n////////////////////");
+        Console.WriteLine($"\n///\nКлиент добавлен в группу {chatId}///\n///");
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception)
@@ -26,9 +26,9 @@ public class ChatHub : Hub
     }
 
     // Этот метод вызывается из клиента через SignalR
-    public async Task SendMessageToUser(string userId, Messages message)
+    public async Task SendMessageToUser(int userId, Messages message)
     {
-        await Clients.User(userId).SendAsync("ReceiveMessage", message);
+        await Clients.User(userId.ToString()).SendAsync("ReceiveMessage", message);
         Console.WriteLine("////////////////////\nSendMessageToUser в ChatHub\n////////////////////");
     }
 }

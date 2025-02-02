@@ -81,6 +81,7 @@ namespace AuthApi.Controllers
             // Отправляем сообщение через SignalR
             await chatHub.Clients.Group(request.ChatId.ToString())
                 .SendAsync("ReceiveMessage", message);
+            Console.WriteLine($"\n////////////////////\nОтправленно в группу {request.ChatId}\n////////////////////\n");
 
             return Ok(message);
         }
