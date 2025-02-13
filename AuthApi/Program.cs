@@ -1,4 +1,5 @@
 ﻿using AuthApi.Data;
+using AuthApi.Models.WebSockets;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,5 +31,7 @@ app.MapControllers();
 
 // Маршрут для SignalR
 app.MapHub<ChatHub>("/chatHub");
+
+app.MapHub<VoiceHub>("/voiceHub");
 
 app.Run();
