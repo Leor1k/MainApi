@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 [Route("api/call")]
 public class CallController : ControllerBase
 {
-    private const string VoiceServerUrl = "http://147.45.175.135:5001"; // Адрес сервера голосовой связи
+    private const string VoiceServerUrl = "http://147.45.175.135:5001/voice"; // Адрес сервера голосовой связи
 
     private readonly HttpClient _httpClient;
 

@@ -39,8 +39,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-02T11:53:29.303Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
@@ -52,8 +51,7 @@
               "RelativeToolTip": "AuthApi\\Controllers\\ChatsController.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-15T11:09:25.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-15T11:09:25.953Z"
             },
             {
               "$type": "Document",
@@ -63,7 +61,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\CallController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\CallController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\CallController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwA8AAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABAAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T09:04:07.744Z",
               "EditorCaption": ""
@@ -78,8 +76,7 @@
               "RelativeToolTip": "AuthApi\\Models\\WebSockets\\VoiceHub.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAADIAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T08:51:16.96Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-11T08:51:16.96Z"
             }
           ]
         }
