@@ -11,6 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<EmailService>();
 builder.Services.AddSignalR();
+builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
