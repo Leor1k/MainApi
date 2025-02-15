@@ -46,6 +46,7 @@ namespace AuthApi.Models.WebSockets
                     CallerId = callerId
                 });
             }
+
         }
 
         // 2. Подтверждение звонка

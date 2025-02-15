@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AuthApi.Models.WebSockets;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
@@ -18,17 +20,25 @@ public class CallController : ControllerBase
     }
 
     [HttpPost("start")]
-    public async Task<IActionResult> StartCall([FromBody] CallRequest request)
+    public async Task<IActionResult> StartCall([FromBody] CallRequest request, [FromServices] IHubContext<VoiceHub> voiceHub)
     {
         // Отправляем команду на сервер голосовой связи
         var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync($"{VoiceServerUrl}/start-call", content);
 
         if (response.IsSuccessStatusCode)
+        {
+            foreach (var userId in request.Users)
+            {
+                await voiceHub.Clients.User(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]); // Отправляем звонок всем пользователям
+            }
+
             return Ok("Звонок начат");
+        }
 
         return StatusCode((int)response.StatusCode, "Ошибка при создании звонка");
     }
+
 
     [HttpPost("confirm")]
     public async Task<IActionResult> ConfirmCall([FromBody] CallConfirmation request)
