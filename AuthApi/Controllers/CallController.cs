@@ -22,15 +22,19 @@ public class CallController : ControllerBase
     [HttpPost("start")]
     public async Task<IActionResult> StartCall([FromBody] CallRequest request, [FromServices] IHubContext<VoiceHub> voiceHub)
     {
+        Console.Clear();
+        Console.WriteLine("Прилетело в API");
         // Отправляем команду на сервер голосовой связи
         var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
         var response = await _httpClient.PostAsync($"{VoiceServerUrl}/start-call", content);
-
+        
         if (response.IsSuccessStatusCode)
         {
+            Console.WriteLine("Успешно прилетел оклик от VoiceModul");
             foreach (var userId in request.Users)
             {
                 await voiceHub.Clients.User(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]); // Отправляем звонок всем пользователям
+                Console.WriteLine($"отправка в IncomingCall с {request.RoomId} для {request.Users[0]}");
             }
 
             return Ok("Звонок начат");
