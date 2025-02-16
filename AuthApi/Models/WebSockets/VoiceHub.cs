@@ -46,7 +46,7 @@ namespace AuthApi.Models.WebSockets
                     CallerId = callerId
                 });
             }
-
+            Console.WriteLine($"Создана комната {roomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
         }
 
         // 2. Подтверждение звонка
@@ -54,6 +54,7 @@ namespace AuthApi.Models.WebSockets
         {
             try
             {
+                Console.WriteLine($"RoomId: {roomId}, Вся структура вызовов: {string.Join(", ", _activeCalls.Keys)}");
                 if (!_activeCalls.TryGetValue(roomId, out var callSession))
                 {
                     Console.WriteLine("Не найден звонок с таким RoomId!");
