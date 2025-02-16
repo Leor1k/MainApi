@@ -30,23 +30,24 @@ namespace AuthApi.Models.WebSockets
         }
 
         // 1. Запрос на начало звонка
-        public async Task StartCall(string callerId, List<string> participantIds)
+        public async Task StartCall(string RoomId,string callerId, List<string> participantIds)
         {
-            string roomId = Guid.NewGuid().ToString();
-            var callSession = new VoiceCallSession(roomId, callerId, participantIds);
-            _activeCalls[roomId] = callSession;
+            var callSession = new VoiceCallSession(RoomId, callerId, participantIds);
+            _activeCalls[RoomId] = callSession;
 
-            Console.WriteLine($"Пользователь {callerId} начал звонок в комнате {roomId}");
+            Console.WriteLine($"Пользователь {callerId} начал звонок в комнате {RoomId}");
 
             foreach (var participantId in participantIds.Where(id => id != callerId))
             {
                 await Clients.Group(participantId).SendAsync("IncomingCall", new
                 {
-                    RoomId = roomId,
+                    RoomId,
                     CallerId = callerId
+
                 });
+                Console.WriteLine($"С комнаты {RoomId} оправляется звонок в юзеру с id {callerId}");
             }
-            Console.WriteLine($"Создана комната {roomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
+            Console.WriteLine($"Создана комната {RoomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
         }
 
         // 2. Подтверждение звонка
