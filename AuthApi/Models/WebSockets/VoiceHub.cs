@@ -52,24 +52,24 @@ namespace AuthApi.Models.WebSockets
         // 2. Подтверждение звонка
         public async Task AcceptCall(string userId, string roomId)
         {
-            if (_activeCalls.TryGetValue(roomId, out var callSession))
+            try
             {
-                callSession.AcceptCall(userId);
-
-                Console.WriteLine($"Пользователь {userId} принял звонок в комнате {roomId}");
-
-                // Если хотя бы один принял – отправляем данные в голосовой сервер
-                if (callSession.HasAcceptedUsers())
+                if (!_activeCalls.TryGetValue(roomId, out var callSession))
                 {
-                    await Clients.Group(callSession.CallerId).SendAsync("CallAccepted", new
-                    {
-                        RoomId = roomId,
-                        Participants = callSession.GetAcceptedUsers()
-                    });
-
-                    Console.WriteLine($"Начинаем голосовой вызов в комнате {roomId}");
+                    Console.WriteLine("Не найден звонок с таким RoomId!");
+                    await Clients.Caller.SendAsync("Error", "Не найден звонок с таким RoomId!");
+                    return;
                 }
+
+                callSession.AcceptCall(userId);
+                Console.WriteLine($"Пользователь {userId} принял звонок в комнате {roomId}");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка: {ex.Message}");
+                await Clients.Caller.SendAsync("Error", $"Ошибка: {ex.Message}");
+            }
+
         }
 
         // 3. Отклонение звонка
