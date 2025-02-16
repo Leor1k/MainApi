@@ -45,7 +45,7 @@ namespace AuthApi.Models.WebSockets
                     CallerId = callerId
 
                 });
-                Console.WriteLine($"С комнаты {RoomId} оправляется звонок в юзеру с id {callerId}");
+                Console.WriteLine($"С комнаты {RoomId} оправляется звонок в юзеру с id {participantId}");
             }
             Console.WriteLine($"Создана комната {RoomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
         }

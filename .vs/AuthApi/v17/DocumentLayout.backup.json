@@ -61,9 +61,10 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\CallController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\CallController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\CallController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABgAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACMAAAB8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-11T09:04:07.744Z"
+              "WhenOpened": "2025-02-11T09:04:07.744Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -73,7 +74,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Models\\WebSockets\\VoiceHub.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\WebSockets\\VoiceHub.cs",
               "RelativeToolTip": "AuthApi\\Models\\WebSockets\\VoiceHub.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAqwCYAAABaAAAAAAAAAA==",
+              "ViewState": "AgIAABkAAAAAAAAAAAAqwDMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-11T08:51:16.96Z",
               "EditorCaption": ""
