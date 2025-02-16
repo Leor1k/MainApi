@@ -33,7 +33,8 @@ public class CallController : ControllerBase
             Console.WriteLine("Успешно прилетел оклик от VoiceModul");
             foreach (var userId in request.Users)
             {
-                await voiceHub.Clients.Client(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]); // Отправляем звонок всем пользователям
+                await voiceHub.Clients.Group(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]);
+                // Отправляем звонок всем пользователям
                 Console.WriteLine($"отправка в IncomingCall с {request.RoomId} для {request.Users[0]}");
             }
 
