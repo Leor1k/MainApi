@@ -31,6 +31,11 @@ public class CallController : ControllerBase
         if (response.IsSuccessStatusCode)
         {
             Console.WriteLine("Успешно прилетел оклик от VoiceModul");
+            string roomId = request.RoomId;
+            string callerId = request.Users[0];
+
+            // ✅ Добавляем звонок в _activeCalls через VoiceHub
+            await voiceHub.Clients.All.SendAsync("StartCall", callerId, request.Users);
             foreach (var userId in request.Users)
             {
                 await voiceHub.Clients.Group(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]);
