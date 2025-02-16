@@ -1,6 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using AuthApi.Models.VoiceModels;
 using Microsoft.AspNetCore.SignalR;
+using Org.BouncyCastle.Asn1.Ocsp;
 
 namespace AuthApi.Models.WebSockets
 {
@@ -39,12 +40,8 @@ namespace AuthApi.Models.WebSockets
 
             foreach (var participantId in participantIds.Where(id => id != callerId))
             {
-                await Clients.Group(participantId).SendAsync("IncomingCall", new
-                {
-                    RoomId,
-                    CallerId = callerId
-
-                });
+                //await voiceHub.Clients.Group(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]);
+                await Clients.Group(participantId).SendAsync("IncomingCall", RoomId, callerId);
                 Console.WriteLine($"С комнаты {RoomId} оправляется звонок в юзеру с id {participantId}");
             }
             Console.WriteLine($"Создана комната {RoomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
