@@ -11,7 +11,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<EmailService>();
 builder.Services.AddSignalR();
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient<VoiceService>();
 
 var app = builder.Build();
 

@@ -1,13 +1,23 @@
 ﻿using System.Collections.Concurrent;
-using AuthApi.Models.VoiceModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
-using Org.BouncyCastle.Asn1.Ocsp;
+using System;
+using AuthApi.Models.VoiceModels;
 
 namespace AuthApi.Models.WebSockets
 {
     public class VoiceHub : Hub
     {
         private static ConcurrentDictionary<string, VoiceCallSession> _activeCalls = new();
+        private readonly VoiceService _voiceService;
+
+        public VoiceHub(VoiceService voiceService)
+        {
+            _voiceService = voiceService;
+        }
+
         public override async Task OnConnectedAsync()
         {
             var userId = Context.GetHttpContext().Request.Query["userId"];
@@ -30,48 +40,51 @@ namespace AuthApi.Models.WebSockets
             await base.OnDisconnectedAsync(exception);
         }
 
-        // 1. Запрос на начало звонка
-        public async Task StartCall(string RoomId,string callerId, List<string> participantIds)
+        public async Task StartCall(string roomId, string callerId, List<string> participantIds)
         {
-            var callSession = new VoiceCallSession(RoomId, callerId, participantIds);
-            _activeCalls[RoomId] = callSession;
+            var callSession = new VoiceCallSession(roomId, callerId, participantIds);
+            _activeCalls[roomId] = callSession;
 
-            Console.WriteLine($"Пользователь {callerId} начал звонок в комнате {RoomId}");
+            Console.WriteLine($"Пользователь {callerId} начал звонок в комнате {roomId}");
+
+            bool success = await _voiceService.StartCallAsync(roomId, callerId, participantIds);
+            if (!success)
+            {
+                Console.WriteLine($"Ошибка отправки запроса в VoiceModul для комнаты {roomId}");
+                await Clients.Caller.SendAsync("Error", "Ошибка соединения с VoiceModul");
+                return;
+            }
 
             foreach (var participantId in participantIds.Where(id => id != callerId))
             {
-                //await voiceHub.Clients.Group(userId.ToString()).SendAsync("IncomingCall", request.RoomId, request.Users[0]);
-                await Clients.Group(participantId).SendAsync("IncomingCall", RoomId, callerId);
-                Console.WriteLine($"С комнаты {RoomId} оправляется звонок в юзеру с id {participantId}");
+                await Clients.Group(participantId).SendAsync("IncomingCall", roomId, callerId);
+                Console.WriteLine($"С комнаты {roomId} оправляется звонок юзеру с id {participantId}");
             }
-            Console.WriteLine($"Создана комната {RoomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
+
+            Console.WriteLine($"Создана комната {roomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
         }
 
-        // 2. Подтверждение звонка
         public async Task AcceptCall(string userId, string roomId)
         {
-            try
+            if (!_activeCalls.TryGetValue(roomId, out var callSession))
             {
-                Console.WriteLine($"RoomId: {roomId}, Вся структура вызовов: {string.Join(", ", _activeCalls.Keys)}");
-                if (!_activeCalls.TryGetValue(roomId, out var callSession))
-                {
-                    Console.WriteLine("Не найден звонок с таким RoomId!");
-                    await Clients.Caller.SendAsync("Error", "Не найден звонок с таким RoomId!");
-                    return;
-                }
-
-                callSession.AcceptCall(userId);
-                Console.WriteLine($"Пользователь {userId} принял звонок в комнате {roomId}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка: {ex.Message}");
-                await Clients.Caller.SendAsync("Error", $"Ошибка: {ex.Message}");
+                Console.WriteLine("Не найден звонок с таким RoomId!");
+                await Clients.Caller.SendAsync("Error", "Не найден звонок с таким RoomId!");
+                return;
             }
 
+            bool success = await _voiceService.ConfirmCallAsync(roomId, userId);
+            if (!success)
+            {
+                Console.WriteLine($"Ошибка подтверждения звонка в VoiceModul для {userId}");
+                await Clients.Caller.SendAsync("Error", "Ошибка подключения к голосовому серверу");
+                return;
+            }
+
+            callSession.AcceptCall(userId);
+            Console.WriteLine($"Пользователь {userId} принял звонок в комнате {roomId}");
         }
 
-        // 3. Отклонение звонка
         public async Task RejectCall(string userId, string roomId)
         {
             if (_activeCalls.TryGetValue(roomId, out var callSession))
@@ -79,6 +92,25 @@ namespace AuthApi.Models.WebSockets
                 callSession.RejectCall(userId);
                 Console.WriteLine($"Пользователь {userId} отклонил звонок в комнате {roomId}");
             }
+        }
+
+        public async Task EndCall(string roomId)
+        {
+            if (!_activeCalls.ContainsKey(roomId))
+            {
+                Console.WriteLine("Звонок не найден.");
+                return;
+            }
+
+            bool success = await _voiceService.EndCallAsync(roomId);
+            if (!success)
+            {
+                Console.WriteLine($"Ошибка завершения звонка в VoiceModul для {roomId}");
+                return;
+            }
+
+            _activeCalls.TryRemove(roomId, out _);
+            Console.WriteLine($"Звонок в комнате {roomId} завершен.");
         }
     }
 }
