@@ -42,15 +42,16 @@ namespace AuthApi.Models.WebSockets
 
         public async Task StartCall(string roomId, string callerId, List<string> participantIds)
         {
+            Console.WriteLine($"[WebStartCall] Прилетел запрос от {callerId} на создание комнаты");
             var callSession = new VoiceCallSession(roomId, callerId, participantIds);
             _activeCalls[roomId] = callSession;
 
-            Console.WriteLine($"Пользователь {callerId} начал звонок в комнате {roomId}");
+            Console.WriteLine($"[WebStartCall] Пользователь {callerId} начал звонок в комнате {roomId}");
 
             bool success = await _voiceService.StartCallAsync(roomId, callerId, participantIds);
             if (!success)
             {
-                Console.WriteLine($"Ошибка отправки запроса в VoiceModul для комнаты {roomId}");
+                Console.WriteLine($"[WebStartCall] Ошибка отправки запроса в VoiceModul для комнаты {roomId}");
                 await Clients.Caller.SendAsync("Error", "Ошибка соединения с VoiceModul");
                 return;
             }
@@ -58,17 +59,17 @@ namespace AuthApi.Models.WebSockets
             foreach (var participantId in participantIds.Where(id => id != callerId))
             {
                 await Clients.Group(participantId).SendAsync("IncomingCall", roomId, callerId);
-                Console.WriteLine($"С комнаты {roomId} оправляется звонок юзеру с id {participantId}");
+                Console.WriteLine($"[WebStartCall] С комнаты {roomId} оправляется звонок юзеру с id {participantId} от {callerId}");
             }
 
-            Console.WriteLine($"Создана комната {roomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
+            Console.WriteLine($"[WebStartCall] Создана комната {roomId}, активные комнаты: {string.Join(", ", _activeCalls.Keys)}");
         }
 
         public async Task AcceptCall(string userId, string roomId)
         {
             if (!_activeCalls.TryGetValue(roomId, out var callSession))
             {
-                Console.WriteLine("Не найден звонок с таким RoomId!");
+                Console.WriteLine("[WebAcceptCall] Не найден звонок с таким RoomId!");
                 await Clients.Caller.SendAsync("Error", "Не найден звонок с таким RoomId!");
                 return;
             }
@@ -76,7 +77,7 @@ namespace AuthApi.Models.WebSockets
             bool success = await _voiceService.ConfirmCallAsync(roomId, userId);
             if (!success)
             {
-                Console.WriteLine($"Ошибка подтверждения звонка в VoiceModul для {userId}");
+                Console.WriteLine($"[WebAcceptCall] Ошибка подтверждения звонка в VoiceModul для {userId}");
                 await Clients.Caller.SendAsync("Error", "Ошибка подключения к голосовому серверу");
                 return;
             }
