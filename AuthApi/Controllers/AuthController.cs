@@ -33,9 +33,13 @@ namespace AuthApi.Controllers
             {
                 return Unauthorized(new { message = "Пользователя с таким Email не существует" });
             }
-            else if (user.password_hash != loginRequest.password)
+
+            var passwordHasher = new PasswordHasher<User>();
+            var result = passwordHasher.VerifyHashedPassword(user, user.password_hash, loginRequest.password);
+
+            if (result == PasswordVerificationResult.Failed)
             {
-                return Unauthorized (new { message = "Неверный email или пароль" });
+                return Unauthorized(new { message = "Неверный email или пароль" });
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -46,7 +50,8 @@ namespace AuthApi.Controllers
                 {
             new Claim("users_id", user.user_id.ToString()),
             new Claim(ClaimTypes.Email, user.email),
-            new Claim("users_name", user.username)                }),
+            new Claim("users_name", user.username)
+                }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
