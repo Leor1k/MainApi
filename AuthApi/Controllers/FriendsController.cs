@@ -25,7 +25,8 @@ namespace AuthApi.Controllers
                 {
                     FriendId = f.user_id == userIdIn ? f.friend_id : f.user_id,
                     FriendName = f.user_id == userIdIn ? f.friend.username : f.user.username,
-                    FriendStatus = "Не в сети"
+                    FriendStatus = f.user_id == userIdIn ? f.friend.status : f.user.status,
+                    FriendPhoto = f.user_id == userIdIn ? f.friend.avatar_url : f.user.avatar_url
                 })
                  .Distinct()
                 .ToListAsync();
