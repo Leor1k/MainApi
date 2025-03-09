@@ -50,7 +50,9 @@ namespace AuthApi.Controllers
                 {
             new Claim("users_id", user.user_id.ToString()),
             new Claim(ClaimTypes.Email, user.email),
-            new Claim("users_name", user.username)
+            new Claim("users_name", user.username),
+            new Claim("users_status", user.status),
+            new Claim("users_pictureName", user.avatar_url)
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
