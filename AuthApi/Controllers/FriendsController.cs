@@ -117,7 +117,8 @@ namespace AuthApi.Controllers
                 {
                     Id = u.user_id,
                     Name = u.username,
-                    Status = "не в сети"
+                    Status = "не в сети",
+                    PhotoName = u.avatar_url
                 })
                 .ToListAsync();
 
@@ -137,7 +138,8 @@ namespace AuthApi.Controllers
                 {
                     FriendId = f.friend_id,
                     UserId = f.user_id,
-                    UserName = f.user.username 
+                    UserName = f.user.username,
+                    PhotoName = f.user.avatar_url
                 })
                 .ToListAsync();
 
