@@ -4,6 +4,7 @@ using System.Text;
 using AuthApi.Data;
 using AuthApi.Models;
 using AuthApi.Models.Requests;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -56,14 +57,20 @@ namespace AuthApi.Controllers
             return Ok(new { token = tokenString });
         }
         [HttpPost("registration")]
-        public async Task<IActionResult> Registration([FromBody] User newUser)
+        public async Task<IActionResult> Registration([FromBody] RegisterRequest registerUser)
         {
             var user = await _context.Users
-        .FirstOrDefaultAsync(u => u.email == newUser.email);
+                .FirstOrDefaultAsync(u => u.email == registerUser.users_email);
+
             if (user != null)
             {
                 return Unauthorized(new { message = "Пользователь с таким Email уже существует" });
             }
+            User newUser = new User();
+            newUser.username = registerUser.users_name;
+            newUser.email = registerUser.users_email;
+            var passwordHasher = new PasswordHasher<User>();
+            newUser.password_hash = passwordHasher.HashPassword(newUser, registerUser.users_password);
             newUser.confirmationcode = GenerateConfirmationCode();
             newUser.createdat = DateTime.UtcNow.AddHours(1);
             newUser.isconfirmed = false;

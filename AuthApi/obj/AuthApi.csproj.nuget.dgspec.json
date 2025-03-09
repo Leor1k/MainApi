@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[4.9.0, )"
             },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
             "Microsoft.AspNetCore.SignalR": {
               "target": "Package",
               "version": "[1.2.0, )"
