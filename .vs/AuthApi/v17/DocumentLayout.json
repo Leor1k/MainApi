@@ -11,6 +11,10 @@
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\requests\\registerrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|c:\\users\\proroksamboy\\desktop\\testics\\mainapi\\authapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C8661950-4704-46B0-B9A7-9C026F1146AC}|AuthApi\\AuthApi.csproj|solutionrelative:authapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -22,11 +26,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Program.cs",
               "RelativeDocumentMoniker": "AuthApi\\Program.cs",
@@ -35,7 +39,19 @@
               "ViewState": "AgIAAA8AAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-02T11:53:29.303Z",
-              "IsPinned": true,
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\User.cs",
+              "RelativeDocumentMoniker": "AuthApi\\Models\\User.cs",
+              "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\User.cs",
+              "RelativeToolTip": "AuthApi\\Models\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-09T12:16:28.653Z",
               "EditorCaption": ""
             },
             {
@@ -59,7 +75,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\AuthController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\AuthController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAA9wFYAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAADsAAAAAAAAAAAAUwEsAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-09T11:28:01.266Z",
               "EditorCaption": ""

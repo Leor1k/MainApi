@@ -74,6 +74,7 @@ namespace AuthApi.Controllers
             newUser.confirmationcode = GenerateConfirmationCode();
             newUser.createdat = DateTime.UtcNow.AddHours(1);
             newUser.isconfirmed = false;
+            newUser.status = "Новенький";
             newUser.avatar_url = $"http://127.0.0.1:9000/avatars/IconUser2.png";
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();

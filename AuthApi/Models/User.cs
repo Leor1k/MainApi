@@ -10,7 +10,7 @@ namespace AuthApi.Models
         public string email { get; set; }
         public string password_hash { get; set; }
         public string avatar_url { get; set; }
-        public string status { get; set; }
+        public string? status { get; set; }
         public DateTime? createdat { get; set; } = DateTime.UtcNow;
         public bool isconfirmed { get; set; } = false;
         public string? confirmationcode { get; set; }
