@@ -26,13 +26,13 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.users_email == loginRequest.email);
+                .FirstOrDefaultAsync(u => u.email == loginRequest.email);
 
             if (user == null)
             {
                 return Unauthorized(new { message = "Пользователя с таким Email не существует" });
             }
-            else if (user.users_password != loginRequest.password)
+            else if (user.password_hash != loginRequest.password)
             {
                 return Unauthorized (new { message = "Неверный email или пароль" });
             }
@@ -44,8 +44,8 @@ namespace AuthApi.Controllers
                 Subject = new ClaimsIdentity(new Claim[]
                 {
             new Claim("users_id", user.user_id.ToString()),
-            new Claim(ClaimTypes.Email, user.users_email),
-            new Claim("users_name", user.users_name)                }),
+            new Claim(ClaimTypes.Email, user.email),
+            new Claim("users_name", user.username)                }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -59,7 +59,7 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> Registration([FromBody] User newUser)
         {
             var user = await _context.Users
-        .FirstOrDefaultAsync(u => u.users_email == newUser.users_email);
+        .FirstOrDefaultAsync(u => u.email == newUser.email);
             if (user != null)
             {
                 return Unauthorized(new { message = "Пользователь с таким Email уже существует" });
@@ -67,18 +67,19 @@ namespace AuthApi.Controllers
             newUser.confirmationcode = GenerateConfirmationCode();
             newUser.createdat = DateTime.UtcNow.AddHours(1);
             newUser.isconfirmed = false;
+            newUser.avatar_url = $"http://127.0.0.1:9000/avatars/IconUser2.png";
             _context.Users.Add(newUser);
             await _context.SaveChangesAsync();
             EmailAndCode email = new EmailAndCode();
-            email.Email = newUser.users_email;
+            email.Email = newUser.email;
             await SendCodeMail(email);
-            return Ok(new { message = $"Для подтверждения регистрации, введите код высланный на {newUser.users_email}" });
+            return Ok(new { message = $"Для подтверждения регистрации, введите код высланный на {newUser.email}" });
         }
         [HttpPost("send_code")]
         public async Task<IActionResult> SendCodeMail([FromBody] EmailAndCode email)
         {
             var user = await _context.Users
-        .FirstOrDefaultAsync(u => u.users_email == email.Email);
+        .FirstOrDefaultAsync(u => u.email == email.Email);
             if (user == null)
             {
                 return Unauthorized(new { message = "Пользователя с таким Email не существует" });
@@ -87,8 +88,8 @@ namespace AuthApi.Controllers
             user.createdat = DateTime.UtcNow.AddHours(1);
             _context.Update(user);
             await _context.SaveChangesAsync();
-            await SendConfirmationEmail(user.users_email, user.confirmationcode);
-            return Ok(new { message = $"Код подтвежденя выслан на {user.users_email}" });
+            await SendConfirmationEmail(user.email, user.confirmationcode);
+            return Ok(new { message = $"Код подтвежденя выслан на {user.email}" });
         }
         public string GenerateConfirmationCode(int length = 6)
         {
@@ -150,7 +151,7 @@ namespace AuthApi.Controllers
         public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmRequest confirmRequest)
         {
             var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.users_email == confirmRequest.Email);
+                .FirstOrDefaultAsync(u => u.email == confirmRequest.Email);
 
             if (user == null)
             {

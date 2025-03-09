@@ -132,7 +132,7 @@ namespace AuthApi.Controllers
                             _context.Users,
                             cp => cp.userid,
                             u => u.user_id,
-                            (cp, u) => new { u.user_id, u.users_name }
+                            (cp, u) => new { u.user_id, u.username }
                         )
                         .ToList()
                 })

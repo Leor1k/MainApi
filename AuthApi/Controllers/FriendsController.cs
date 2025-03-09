@@ -24,7 +24,7 @@ namespace AuthApi.Controllers
                 .Select(f => new
                 {
                     FriendId = f.user_id == userIdIn ? f.friend_id : f.user_id,
-                    FriendName = f.user_id == userIdIn ? f.friend.users_name : f.user.users_name,
+                    FriendName = f.user_id == userIdIn ? f.friend.username : f.user.username,
                     FriendStatus = "Не в сети"
                 })
                  .Distinct()
@@ -116,7 +116,7 @@ namespace AuthApi.Controllers
                 .Select(u => new FriendDTO
                 {
                     Id = u.user_id,
-                    Name = u.users_name,
+                    Name = u.username,
                     Status = "не в сети"
                 })
                 .ToListAsync();
@@ -137,7 +137,7 @@ namespace AuthApi.Controllers
                 {
                     FriendId = f.friend_id,
                     UserId = f.user_id,
-                    UserName = f.user.users_name 
+                    UserName = f.user.username 
                 })
                 .ToListAsync();
 
