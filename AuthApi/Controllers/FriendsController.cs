@@ -172,13 +172,13 @@ namespace AuthApi.Controllers
 
             return Ok("Вы больше не друзья...");
         }
-        [HttpGet("getPrivateChat")]
-        public async Task<IActionResult> getPrivateChat(FriendsRequest request)
+        [HttpGet("getPrivateChat/{UserId}/{FriendId}")]
+        public async Task<ActionResult> getPrivateChat(int UserId, int FriendId)
         {
             var chat = await _context.Chats
                 .Where(c => c.chattype == "private" &&
-                            _context.ChatParticipants.Any(cp => cp.chatid == c.chatid && cp.userid == request.UserId) &&
-                            _context.ChatParticipants.Any(cp => cp.chatid == c.chatid && cp.userid == request.FriendId))
+                            _context.ChatParticipants.Any(cp => cp.chatid == c.chatid && cp.userid == UserId) &&
+                            _context.ChatParticipants.Any(cp => cp.chatid == c.chatid && cp.userid == FriendId))
                 .FirstOrDefaultAsync();
 
             if (chat != null)
