@@ -138,7 +138,6 @@ namespace AuthApi.Controllers
         [HttpPost("remove")]
         public async Task<IActionResult> RemoveFriend(FriendsRequest request)
         {
-            // Получаем записи о дружбе
             var friendships = await _context.Friendships
                 .Where(f => (f.user_id == request.UserId && f.friend_id == request.FriendId) ||
                             (f.user_id == request.FriendId && f.friend_id == request.UserId))
@@ -147,11 +146,9 @@ namespace AuthApi.Controllers
             if (!friendships.Any())
                 return NotFound("Пользователя не найдено");
 
-            // Удаляем записи о дружбе
             _context.Friendships.RemoveRange(friendships);
             await _context.SaveChangesAsync();
 
-            // Удаляем участников чатов, в которых они состоят
             var chatParticipants = await _context.ChatParticipants
                 .Where(cp => cp.userid == request.UserId || cp.userid == request.FriendId)
                 .ToListAsync();
@@ -162,10 +159,9 @@ namespace AuthApi.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            // Удаляем приватные чаты, в которых больше не осталось участников
             var privateChats = await _context.Chats
                 .Where(c => c.chattype == "private" &&
-                            !_context.ChatParticipants.Any(cp => cp.chatid == c.chatid)) // Чаты без участников
+                            !_context.ChatParticipants.Any(cp => cp.chatid == c.chatid))
                 .ToListAsync();
 
             if (privateChats.Any())
@@ -176,6 +172,23 @@ namespace AuthApi.Controllers
 
             return Ok("Вы больше не друзья...");
         }
+        [HttpGet("getPrivateChat")]
+        public async Task<IActionResult> getPrivateChat(FriendsRequest request)
+        {
+            var chat = await _context.Chats
+                .Where(c => c.chattype == "private" &&
+                            _context.ChatParticipants.Any(cp => cp.chatid == c.chatid && cp.userid == request.UserId) &&
+                            _context.ChatParticipants.Any(cp => cp.chatid == c.chatid && cp.userid == request.FriendId))
+                .FirstOrDefaultAsync();
+
+            if (chat != null)
+            {
+                return Ok(chat.chatid);
+            }
+
+            return NotFound("Приватный чат не найден между этими пользователями.");
+        }
+
 
 
 
