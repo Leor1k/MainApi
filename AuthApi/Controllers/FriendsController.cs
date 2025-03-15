@@ -78,7 +78,8 @@ namespace AuthApi.Controllers
             {
                 user_id = request.UserId,
                 friend_id = request.FriendId,
-                status = "В друзьях"
+                status = "В друзьях",
+                created_at = DateTime.UtcNow
             };
             _context.Friendships.Add(reverseFriendship);
 

@@ -117,3 +117,5 @@ C:\Users\ProrokSamBoy\Desktop\Testics\MainApi\AuthApi\obj\Debug\net8.0\refint\Au
 C:\Users\ProrokSamBoy\Desktop\Testics\MainApi\AuthApi\obj\Debug\net8.0\AuthApi.pdb
 C:\Users\ProrokSamBoy\Desktop\Testics\MainApi\AuthApi\obj\Debug\net8.0\AuthApi.genruntimeconfig.cache
 C:\Users\ProrokSamBoy\Desktop\Testics\MainApi\AuthApi\obj\Debug\net8.0\ref\AuthApi.dll
+C:\Users\ProrokSamBoy\Desktop\Testics\MainApi\AuthApi\bin\Debug\net8.0\Microsoft.Extensions.WebEncoders.dll
+C:\Users\ProrokSamBoy\Desktop\Testics\MainApi\AuthApi\bin\Debug\net8.0\System.Security.Cryptography.Xml.dll

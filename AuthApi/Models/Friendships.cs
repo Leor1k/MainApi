@@ -15,7 +15,7 @@ namespace AuthApi.Models
 
         public string status { get; set; }
 
-        public DateTime? created_at { get; set; } = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+        public DateTime? created_at { get; set; } = DateTime.UtcNow;
 
 
         [ForeignKey("user_id")]
@@ -23,5 +23,6 @@ namespace AuthApi.Models
 
         [ForeignKey("friend_id")]
         public virtual User friend { get; set; }
+
     }
 }
