@@ -3624,6 +3624,16 @@
       "code": "NU1903",
       "level": "Warning",
       "warningLevel": 1,
+      "message": "У пакета \"Microsoft.AspNetCore.Identity\" 2.3.0 есть известная уязвимость https://github.com/advisories/GHSA-2865-hh9g-w894 (уровень серьезности: высокий)",
+      "libraryId": "Microsoft.AspNetCore.Identity",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    },
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
       "message": "У пакета \"Newtonsoft.Json\" 11.0.2 есть известная уязвимость https://github.com/advisories/GHSA-5crp-9r3c-p9vr (уровень серьезности: высокий)",
       "libraryId": "Newtonsoft.Json",
       "targetGraphs": [

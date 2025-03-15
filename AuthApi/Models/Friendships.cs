@@ -22,6 +22,6 @@ namespace AuthApi.Models
         public virtual User user { get; set; }
 
         [ForeignKey("friend_id")]
-        public virtual User friend { get; set; }Spe
+        public virtual User friend { get; set; }
     }
 }
