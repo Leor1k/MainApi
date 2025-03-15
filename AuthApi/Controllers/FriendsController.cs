@@ -59,7 +59,7 @@ namespace AuthApi.Controllers
             };
             var UserName = await _context.Users.FirstOrDefaultAsync(i => i.user_id == request.UserId);
             FriendSignalR ForSendFriendRequest = new FriendSignalR(request.FriendId, request.UserId, UserName.username, UserName.avatar_url);
-
+            Console.WriteLine($"По порядку: {request.FriendId}; {request.UserId}; {UserName.username}; {UserName.avatar_url}");
             await chatHub.Clients.Group(request.FriendId.ToString())
                .SendAsync("NewRequestOnFriend", ForSendFriendRequest);
 
