@@ -15,12 +15,13 @@ namespace AuthApi.Models
 
         public string status { get; set; }
 
-        public DateTime? created_at { get; set; } = DateTime.UtcNow;
+        public DateTime? created_at { get; set; } = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Unspecified);
+
 
         [ForeignKey("user_id")]
         public virtual User user { get; set; }
 
         [ForeignKey("friend_id")]
-        public virtual User friend { get; set; }
+        public virtual User friend { get; set; }Spe
     }
 }
