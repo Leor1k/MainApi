@@ -61,7 +61,7 @@ namespace AuthApi.Controllers
             FriendSignalR ForSendFriendRequest = new FriendSignalR(request.FriendId, request.UserId, UserName.username, UserName.avatar_url);
 
             await chatHub.Clients.Group(request.FriendId.ToString())
-               .SendAsync("ReceiveMessage", ForSendFriendRequest);
+               .SendAsync("NewRequestOnFriend", ForSendFriendRequest);
 
             _context.Friendships.Add(friendRequest);
             await _context.SaveChangesAsync();
