@@ -42,8 +42,8 @@ namespace AuthApi.Controllers
 
             var participants = new List<ChatParticipant>
             {
-                new ChatParticipant { chatid = chat.chatid, userid = request.UserId1 },
-                new ChatParticipant { chatid = chat.chatid, userid = request.UserId2 }
+                new ChatParticipant { chatid = chat.chatid, userid = request.UserId1, role = "Создатель" },
+                new ChatParticipant { chatid = chat.chatid, userid = request.UserId2, role = "Участник"}
             };
             _context.ChatParticipants.AddRange(participants);
             await _context.SaveChangesAsync();

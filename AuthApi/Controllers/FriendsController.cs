@@ -85,6 +85,7 @@ namespace AuthApi.Controllers
 
             await _context.SaveChangesAsync();
 
+
             return Ok("Вы стали друзьями!");
         }
         [HttpPost("remove")]
