@@ -88,22 +88,6 @@ namespace AuthApi.Controllers
 
             return Ok("Вы стали друзьями!");
         }
-        [HttpPost("remove")]
-        public async Task<IActionResult> RemoveFriend(FriendsRequest request)
-        {
-            var friendships = await _context.Friendships
-                .Where(f => (f.user_id == request.UserId && f.friend_id == request.FriendId) ||
-                            (f.user_id == request.FriendId && f.friend_id == request.UserId))
-                .ToListAsync();
-
-            if (!friendships.Any())
-                return NotFound("Пользователя не найдено");
-
-            _context.Friendships.RemoveRange(friendships);
-            await _context.SaveChangesAsync();
-
-            return Ok("Вы больше не друзья....");
-        }
         [HttpGet("search")]
         public async Task<IActionResult> SearchUsersByIds([FromQuery] int currentUserId, [FromQuery] List<int> userIds)
         {
@@ -151,6 +135,48 @@ namespace AuthApi.Controllers
 
             return Ok(friendRequests);
         }
+        [HttpPost("remove")]
+        public async Task<IActionResult> RemoveFriend(FriendsRequest request)
+        {
+            // Получаем записи о дружбе
+            var friendships = await _context.Friendships
+                .Where(f => (f.user_id == request.UserId && f.friend_id == request.FriendId) ||
+                            (f.user_id == request.FriendId && f.friend_id == request.UserId))
+                .ToListAsync();
+
+            if (!friendships.Any())
+                return NotFound("Пользователя не найдено");
+
+            // Удаляем записи о дружбе
+            _context.Friendships.RemoveRange(friendships);
+            await _context.SaveChangesAsync();
+
+            // Удаляем участников чатов, в которых они состоят
+            var chatParticipants = await _context.ChatParticipants
+                .Where(cp => cp.userid == request.UserId || cp.userid == request.FriendId)
+                .ToListAsync();
+
+            if (chatParticipants.Any())
+            {
+                _context.ChatParticipants.RemoveRange(chatParticipants);
+                await _context.SaveChangesAsync();
+            }
+
+            // Удаляем приватные чаты, в которых больше не осталось участников
+            var privateChats = await _context.Chats
+                .Where(c => c.chattype == "private" &&
+                            !_context.ChatParticipants.Any(cp => cp.chatid == c.chatid)) // Чаты без участников
+                .ToListAsync();
+
+            if (privateChats.Any())
+            {
+                _context.Chats.RemoveRange(privateChats);
+                await _context.SaveChangesAsync();
+            }
+
+            return Ok("Вы больше не друзья...");
+        }
+
 
 
     }
