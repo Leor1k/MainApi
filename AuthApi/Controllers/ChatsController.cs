@@ -88,13 +88,13 @@ namespace AuthApi.Controllers
         [HttpGet("get-messages/{UserId}/{FriendId}")]
         public async Task<ActionResult> GetUsersList(int UserId, int FriendId)
         {
-            // Находим чат, в котором участвуют только два указанных пользователя
+            
             var chat = await _context.Chats
                 .Join(_context.ChatParticipants, c => c.chatid, cp => cp.chatid, (c, cp) => new { Chat = c, Participant = cp })
                 .Where(c => c.Participant.userid == UserId || c.Participant.userid == FriendId)
-                .GroupBy(c => c.Chat.chatid) // Группируем по ID чата
-                .Where(g => g.Count() == 2 && g.All(p => p.Participant.userid == UserId || p.Participant.userid == FriendId)) // Фильтруем чаты с двумя указанными пользователями
-                .Select(g => g.First().Chat) // Выбираем чат из группы
+                .GroupBy(c => c.Chat.chatid) 
+                .Where(g => g.Count() == 2 && g.All(p => p.Participant.userid == UserId || p.Participant.userid == FriendId))
+                .Select(g => g.First().Chat) 
                 .FirstOrDefaultAsync();
 
             if (chat == null)
@@ -102,7 +102,6 @@ namespace AuthApi.Controllers
                 return NotFound("Не найден приватный чат между указанными пользователями.");
             }
 
-            // Получаем сообщения из найденного чата
             var messages = await _context.Messagess
                 .Where(m => m.chatid == chat.chatid)
                 .OrderBy(m => m.createdat)

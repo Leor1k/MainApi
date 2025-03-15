@@ -2,6 +2,7 @@
 using AuthApi.Models;
 using AuthApi.Models.Requests;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace AuthApi.Controllers
@@ -42,7 +43,7 @@ namespace AuthApi.Controllers
         }
 
         [HttpPost("request/send")]
-        public async Task<IActionResult> SendFriendRequest(FriendsRequest request)
+        public async Task<IActionResult> SendFriendRequest(FriendsRequest request, [FromServices] IHubContext<ChatHub> chatHub)
         {
             var existingRequest = await _context.Friendships
                 .FirstOrDefaultAsync(f => f.user_id == request.UserId && f.friend_id == request.FriendId);
@@ -56,6 +57,11 @@ namespace AuthApi.Controllers
                 friend_id = request.FriendId,
                 status = "В ожидании ответа"
             };
+            var UserName = await _context.Users.FirstOrDefaultAsync(i => i.user_id == request.UserId);
+            FriendSignalR ForSendFriendRequest = new FriendSignalR(request.FriendId, request.UserId, UserName.username, UserName.avatar_url);
+
+            await chatHub.Clients.Group(request.FriendId.ToString())
+               .SendAsync("ReceiveMessage", ForSendFriendRequest);
 
             _context.Friendships.Add(friendRequest);
             await _context.SaveChangesAsync();
