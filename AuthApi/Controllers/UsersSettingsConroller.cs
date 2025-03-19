@@ -7,14 +7,14 @@ namespace AuthApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersSettingsConroller : ControllerBase
+    public class UsersSettingsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public UsersSettingsConroller(AppDbContext context)
+        public UsersSettingsController(AppDbContext context)
         {
             _context = context;
         }
-        [HttpPatch("ChangeUserName/{UserId}")]
+        [HttpPatch("ChangeUserName")]
         public async Task<ActionResult> ChangeUserName([FromBody] ChangeNameRequest request)
         {
             var user = await _context.Users
