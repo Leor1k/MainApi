@@ -14,7 +14,7 @@ namespace AuthApi.Controllers
         {
             _context = context;
         }
-        [HttpPatch("ChangeUserName")]
+        [HttpPost("ChangeUserName")]
         public async Task<ActionResult> ChangeUserName([FromBody] ChangeNameRequest request)
         {
             var user = await _context.Users
