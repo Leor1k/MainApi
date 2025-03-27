@@ -2,15 +2,15 @@ pipeline {
     agent any  // Запускаем на любом доступном агенте
 
     environment {
-        DEPLOY_SERVER = 'user@your-server'  // Данные сервера
-        DEPLOY_PATH = '/path/to/your/app'  // Куда будем заливать проект
-        SERVICE_NAME = 'your-app.service'  // Название systemd-сервиса
+        DEPLOY_SERVER = 'root@147.45.175.135'  // Данные сервера
+        DEPLOY_PATH = '~/JenkisWork/Apis'  // Куда будем заливать проект
+        SERVICE_NAME = 'myapi.service'  // Название systemd-сервиса
     }
 
     stages {
         stage('Checkout') {  // Клонирование репозитория
             steps {
-                git branch: 'main', credentialsId: 'git-credentials-id', url: 'git@github.com:your-repo.git'
+                git branch: 'main', credentialsId: 'git-credentials-id', url: 'git@github.com:Leor1k/MainApi.git'
             }
         }
         
