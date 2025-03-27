@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {  // Клонирование репозитория
             steps {
-                git branch: 'main', credentialsId: 'git-credentials-id', url: 'git@github.com:Leor1k/MainApi.git'
+                 git branch: 'main', credentialsId: 'git-credentials-id', url: 'git@github.com:your-repo.git'
             }
         }
         
