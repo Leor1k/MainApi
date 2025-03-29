@@ -49,6 +49,44 @@ namespace AuthApi.Controllers
             await _context.SaveChangesAsync();
             return Ok(chat);
         }
+        [HttpPost("create-group")]
+        public async Task<IActionResult> CreateGroupChat([FromBody] CreateGroupChat request)
+        {
+            if (request.UsersId == null || request.UsersId.Length == 0)
+                return BadRequest("Нельзя создать чат без участников.");
+
+            var chat = new Chat
+            {
+                chatname = "Новый групповой чат",
+                chattype = "group",
+                createdat = DateTime.UtcNow
+            };
+
+            _context.Chats.Add(chat);
+            await _context.SaveChangesAsync();
+            var participants = new List<ChatParticipant>
+    {
+        new ChatParticipant { chatid = chat.chatid, userid = request.CreatorID, role = "Создатель" }
+    };
+
+            foreach (var userId in request.UsersId)
+            {
+                if (userId != request.CreatorID)
+                {
+                    participants.Add(new ChatParticipant { chatid = chat.chatid, userid = userId, role = "Участник" });
+                }
+            }
+
+            _context.ChatParticipants.AddRange(participants);
+            await _context.SaveChangesAsync();
+            var DataGroupChat = new
+            {
+                ChatID = chat.chatid,
+                CreatorId = request.CreatorID
+            };
+            return Ok(DataGroupChat);
+        }
+
         [HttpPost("send-message")]
         public async Task<IActionResult> SendMessage([FromBody] SendMessageRequest request, [FromServices] IHubContext<ChatHub> chatHub)
         {

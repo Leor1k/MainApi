@@ -25,10 +25,8 @@ app.UseRouting(); // Важно добавить вызов UseRouting
 
 app.UseAuthorization();
 
-// Маршрутизация для контроллеров
 app.MapControllers();
 
-// Маршрут для SignalR
 app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
