@@ -151,27 +151,31 @@ namespace AuthApi.Controllers
         public async Task<ActionResult> GetUsersChats(int UserId)
         {
             var chats = await _context.ChatParticipants
-                .Where(cp => cp.userid == UserId)
+                .Where(cp => cp.userid == UserId) 
+                .Select(cp => cp.chatid) 
+                .Distinct()
                 .Join(
-                    _context.Messagess.GroupBy(m => m.chatid)
+                    _context.Messagess.GroupBy(m => m.chatid) 
                         .Select(g => new { ChatId = g.Key, LastMessageTime = g.Max(m => m.createdat) }),
-                    cp => cp.chatid,
-                    m => m.ChatId,
-                    (cp, m) => new { cp.chatid, m.LastMessageTime }
+                    chatId => chatId, 
+                    msg => msg.ChatId,
+                    (chatId, msg) => new { ChatId = chatId, msg.LastMessageTime }
                 )
-                .OrderByDescending(c => c.LastMessageTime)
+                .OrderByDescending(c => c.LastMessageTime) 
                 .Select(c => new
                 {
-                    ChatId = c.chatid,
+                    ChatId = c.ChatId,
                     Participants = _context.ChatParticipants
-                        .Where(cp => cp.chatid == c.chatid)
-                        .Join(
-                            _context.Users,
-                            cp => cp.userid,
-                            u => u.user_id,
-                            (cp, u) => new { u.user_id, u.username }
-                        )
-                        .ToList()
+                        .Where(cp => cp.chatid == c.ChatId) 
+                        .Select(cp => new
+                        {
+                            cp.userid,
+                            UserName = _context.Users
+                                .Where(u => u.user_id == cp.userid)
+                                .Select(u => u.username)
+                                .FirstOrDefault()
+                        })
+                        .ToList() 
                 })
                 .ToListAsync();
 
@@ -182,6 +186,7 @@ namespace AuthApi.Controllers
 
             return Ok(chats);
         }
+
 
 
     }
