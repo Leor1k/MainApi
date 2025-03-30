@@ -208,6 +208,39 @@ namespace AuthApi.Controllers
 
             return Ok(messages);
         }
+        [HttpGet("get-chat-participants/{chatId}")]
+        public async Task<ActionResult> GetChatParticipants(int chatId)
+        {
+            var chat = await _context.Chats
+                .Where(c => c.chatid == chatId)
+                .FirstOrDefaultAsync();
+
+            if (chat == null)
+            {
+                return NotFound("Чат с указанным ID не найден.");
+            }
+
+            var participants = await _context.ChatParticipants
+                .Where(cp => cp.chatid == chatId)
+                .Join(_context.Users,
+                    cp => cp.userid,
+                    u => u.user_id,
+                    (cp, u) => new
+                    {
+                        UserId = u.user_id,
+                        UserName = u.username,
+                        Role = cp.role
+                    })
+                .ToListAsync();
+
+            if (!participants.Any())
+            {
+                return NotFound("В этом чате нет участников.");
+            }
+
+            return Ok(participants);
+        }
+
 
 
     }
