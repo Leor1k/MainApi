@@ -189,7 +189,7 @@ namespace AuthApi.Controllers
             return Ok(chats);
         }
         
-        [HttpGet("get-messages/byIdChat{chatId}")]
+        [HttpGet("get-messages-byIdChat{chatId}")]
         public async Task<ActionResult> GetChatMessages(int chatId)
         {
             var chat = await _context.Chats
