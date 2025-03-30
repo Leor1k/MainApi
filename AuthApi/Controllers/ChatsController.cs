@@ -150,46 +150,36 @@ namespace AuthApi.Controllers
         [HttpGet("get-chats/{UserId}")]
         public async Task<ActionResult> GetUsersChats(int UserId)
         {
-            Console.WriteLine($"[get-chats] прилетело с id {UserId}");
-            var chats = await _context.ChatParticipants
-                .Where(cp => cp.userid == UserId) 
-                .Select(cp => cp.chatid) 
-                .Distinct()
-                .Join(
-                    _context.Messagess.GroupBy(m => m.chatid) 
-                        .Select(g => new { ChatId = g.Key, LastMessageTime = g.Max(m => m.createdat) }),
-                    chatId => chatId, 
-                    msg => msg.ChatId,
-                    (chatId, msg) => new { ChatId = chatId, msg.LastMessageTime }
-                )
-                .OrderByDescending(c => c.LastMessageTime) 
-                .Select(c => new
+            var chats = await _context.Chats
+                .Where(chat => _context.ChatParticipants.Any(cp => cp.chatid == chat.chatid && cp.userid == UserId))
+                .Select(chat => new
                 {
-                    ChatId = c.ChatId,
+                    ChatId = chat.chatid,
+                    ChatType = chat.chattype, // Чтобы понимать, это группа или приватный чат
                     Participants = _context.ChatParticipants
-                        .Where(cp => cp.chatid == c.ChatId) 
-                        .Select(cp => new
-                        {
-                            cp.userid,
-                            UserName = _context.Users
-                                .Where(u => u.user_id == cp.userid)
-                                .Select(u => u.username)
-                                .FirstOrDefault()
-                        })
-                        .ToList() 
+                        .Where(cp => cp.chatid == chat.chatid)
+                        .Join(
+                            _context.Users,
+                            cp => cp.userid,
+                            u => u.user_id,
+                            (cp, u) => new { u.user_id, u.username }
+                        )
+                        .ToList(),
+                    LastMessageTime = _context.Messagess
+                        .Where(m => m.chatid == chat.chatid)
+                        .OrderByDescending(m => m.createdat)
+                        .Select(m => m.createdat)
+                        .FirstOrDefault()
                 })
+                .OrderByDescending(chat => chat.LastMessageTime) // Сортируем по последнему сообщению
                 .ToListAsync();
-            Console.WriteLine($"[get-chats] возврат {chats.Count}");
 
-            if (chats == null || chats.Count == 0)
+            if (!chats.Any())
             {
                 return NotFound("Чаты не найдены");
             }
 
             return Ok(chats);
         }
-
-
-
     }
 }

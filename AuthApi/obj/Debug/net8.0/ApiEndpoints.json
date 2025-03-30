@@ -93,8 +93,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "newUser",
-        "Type": "AuthApi.Models.User",
+        "Name": "registerUser",
+        "Type": "AuthApi.Models.Requests.RegisterRequest",
         "IsRequired": true
       }
     ],
@@ -118,6 +118,22 @@
   },
   {
     "ContainingType": "AuthApi.Controllers.ChatsController",
+    "Method": "CreateGroupChat",
+    "RelativePath": "api/Chats/create-group",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AuthApi.Models.Requests.CreateGroupChat",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.ChatsController",
     "Method": "CreatePrivateChat",
     "RelativePath": "api/Chats/create-private-chat",
     "HttpMethod": "POST",
@@ -134,21 +150,37 @@
   },
   {
     "ContainingType": "AuthApi.Controllers.ChatsController",
-    "Method": "GetMessages",
-    "RelativePath": "api/Chats/get-messages",
+    "Method": "GetUsersChats",
+    "RelativePath": "api/Chats/get-chats/{UserId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "ChatId",
+        "Name": "UserId",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.ChatsController",
+    "Method": "GetUsersList",
+    "RelativePath": "api/Chats/get-messages/{UserId}/{FriendId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
       {
         "Name": "UserId",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
+      },
+      {
+        "Name": "FriendId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -197,6 +229,27 @@
         "Name": "userId",
         "Type": "System.Int32",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.FriendsController",
+    "Method": "getPrivateChat",
+    "RelativePath": "api/Friends/getPrivateChat/{UserId}/{FriendId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "FriendId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -266,6 +319,22 @@
         "Name": "userIds",
         "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AuthApi.Controllers.UsersSettingsController",
+    "Method": "ChangeUserName",
+    "RelativePath": "api/UsersSettings/ChangeUserName",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AuthApi.Models.Requests.ChangeNameRequest",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
