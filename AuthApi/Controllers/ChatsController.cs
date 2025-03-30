@@ -147,6 +147,7 @@ namespace AuthApi.Controllers
 
             return Ok(messages);
         }
+
         [HttpGet("get-chats/{UserId}")]
         public async Task<ActionResult> GetUsersChats(int UserId)
         {
@@ -187,6 +188,27 @@ namespace AuthApi.Controllers
 
             return Ok(chats);
         }
+        
+        [HttpGet("get-messages/byIdChat{chatId}")]
+        public async Task<ActionResult> GetChatMessages(int chatId)
+        {
+            var chat = await _context.Chats
+                .Where(c => c.chatid == chatId)
+                .FirstOrDefaultAsync();
+
+            if (chat == null)
+            {
+                return NotFound("Чат с указанным ID не найден.");
+            }
+
+            var messages = await _context.Messagess
+                .Where(m => m.chatid == chatId)
+                .OrderBy(m => m.createdat)
+                .ToListAsync();
+
+            return Ok(messages);
+        }
+
 
     }
 }
