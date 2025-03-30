@@ -155,7 +155,13 @@ namespace AuthApi.Controllers
                 .Select(chat => new
                 {
                     ChatId = chat.chatid,
-                    ChatType = chat.chattype, // Чтобы понимать, это группа или приватный чат
+                    ChatType = chat.chattype,
+                    ChatName = chat.chattype == "group"
+                        ? chat.chatname  // Для группового чата берём имя из БД
+                        : _context.ChatParticipants
+                            .Where(cp => cp.chatid == chat.chatid && cp.userid != UserId)
+                            .Join(_context.Users, cp => cp.userid, u => u.user_id, (cp, u) => u.username)
+                            .FirstOrDefault(), // Для приватных чатов берём имя собеседника
                     Participants = _context.ChatParticipants
                         .Where(cp => cp.chatid == chat.chatid)
                         .Join(
@@ -171,7 +177,7 @@ namespace AuthApi.Controllers
                         .Select(m => m.createdat)
                         .FirstOrDefault()
                 })
-                .OrderByDescending(chat => chat.LastMessageTime) // Сортируем по последнему сообщению
+                .OrderByDescending(chat => chat.LastMessageTime)
                 .ToListAsync();
 
             if (!chats.Any())
@@ -181,5 +187,6 @@ namespace AuthApi.Controllers
 
             return Ok(chats);
         }
+
     }
 }
