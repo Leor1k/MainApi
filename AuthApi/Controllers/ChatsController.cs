@@ -57,7 +57,7 @@ namespace AuthApi.Controllers
 
             var chat = new Chat
             {
-                chatname = "Новый групповой чат",
+                chatname = request.ChatName,
                 chattype = "group",
                 createdat = DateTime.UtcNow
             };

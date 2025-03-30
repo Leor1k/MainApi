@@ -9,5 +9,6 @@
     {
         public int CreatorID { get; set; }
         public int[] UsersId { get; set; }
+        public string ChatName { get; set; }
     }
 }
