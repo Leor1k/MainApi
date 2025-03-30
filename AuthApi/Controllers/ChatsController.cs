@@ -150,6 +150,7 @@ namespace AuthApi.Controllers
         [HttpGet("get-chats/{UserId}")]
         public async Task<ActionResult> GetUsersChats(int UserId)
         {
+            Console.WriteLine($"[get-chats] прилетело с id {UserId}");
             var chats = await _context.ChatParticipants
                 .Where(cp => cp.userid == UserId) 
                 .Select(cp => cp.chatid) 
@@ -178,6 +179,7 @@ namespace AuthApi.Controllers
                         .ToList() 
                 })
                 .ToListAsync();
+            Console.WriteLine($"[get-chats] возврат {chats.Count}");
 
             if (chats == null || chats.Count == 0)
             {
