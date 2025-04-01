@@ -28,9 +28,10 @@
               "RelativeDocumentMoniker": "AuthApi\\Models\\Requests\\CreateChatRequest.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Models\\Requests\\CreateChatRequest.cs",
               "RelativeToolTip": "AuthApi\\Models\\Requests\\CreateChatRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA4AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAD4vw0AAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T10:39:00.729Z"
+              "WhenOpened": "2025-03-29T10:39:00.729Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -40,7 +41,7 @@
               "RelativeDocumentMoniker": "AuthApi\\Controllers\\ChatsController.cs",
               "ToolTip": "C:\\Users\\ProrokSamBoy\\Desktop\\Testics\\MainApi\\AuthApi\\Controllers\\ChatsController.cs",
               "RelativeToolTip": "AuthApi\\Controllers\\ChatsController.cs",
-              "ViewState": "AgIAANAAAAAAAAAAAAAcwOkAAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAAPUAAAAAAAAAAAAowAgBAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T09:42:01.352Z",
               "EditorCaption": ""

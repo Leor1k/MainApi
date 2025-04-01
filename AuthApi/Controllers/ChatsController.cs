@@ -10,7 +10,7 @@ namespace AuthApi.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class ChatsController : ControllerBase
-    {   
+    {
         private readonly AppDbContext _context;
         public ChatsController(AppDbContext context, EmailService emailService)
         {
@@ -115,8 +115,6 @@ namespace AuthApi.Controllers
 
             _context.Messagess.Add(message);
             await _context.SaveChangesAsync();
-
-            // Отправляем сообщение в группу получателя
             await chatHub.Clients.Group(request.ReceiverId.ToString())
                 .SendAsync("ReceiveMessage", message);
 
@@ -126,13 +124,13 @@ namespace AuthApi.Controllers
         [HttpGet("get-messages/{UserId}/{FriendId}")]
         public async Task<ActionResult> GetUsersList(int UserId, int FriendId)
         {
-            
+
             var chat = await _context.Chats
                 .Join(_context.ChatParticipants, c => c.chatid, cp => cp.chatid, (c, cp) => new { Chat = c, Participant = cp })
                 .Where(c => c.Participant.userid == UserId || c.Participant.userid == FriendId)
-                .GroupBy(c => c.Chat.chatid) 
+                .GroupBy(c => c.Chat.chatid)
                 .Where(g => g.Count() == 2 && g.All(p => p.Participant.userid == UserId || p.Participant.userid == FriendId))
-                .Select(g => g.First().Chat) 
+                .Select(g => g.First().Chat)
                 .FirstOrDefaultAsync();
 
             if (chat == null)
@@ -188,7 +186,7 @@ namespace AuthApi.Controllers
 
             return Ok(chats);
         }
-        
+
         [HttpGet("get-messages-byIdChat/{chatId}")]
         public async Task<ActionResult> GetChatMessages(int chatId)
         {
@@ -240,6 +238,38 @@ namespace AuthApi.Controllers
 
             return Ok(participants);
         }
+        [HttpPost("add-users-to-chat")]
+        public async Task<IActionResult> AddUsersToChat([FromBody] AddUserInChat request)
+        {
+            if (request.UsersId == null || request.UsersId.Length == 0)
+                return BadRequest("Не переданы участники для добавления.");
+
+            var chat = await _context.Chats
+                .Where(c => c.chatid == request.ChatId)
+                .FirstOrDefaultAsync();
+
+            if (chat == null)
+                return NotFound("Чат с указанным ID не найден.");
+
+            var existingParticipants = await _context.ChatParticipants
+                .Where(cp => cp.chatid == request.ChatId)
+                .Select(cp => cp.userid)
+                .ToListAsync();
+
+            var newParticipants = request.UsersId
+                .Where(userId => !existingParticipants.Contains(userId))
+                .Select(userId => new ChatParticipant { chatid = request.ChatId, userid = userId, role = "Участник" })
+                .ToList();
+
+            if (newParticipants.Count == 0)
+                return BadRequest("Все пользователи уже состоят в этом чате.");
+
+            _context.ChatParticipants.AddRange(newParticipants);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { ChatId = request.ChatId, AddedUsers = newParticipants.Select(u => u.userid) });
+        }
+
 
 
 
