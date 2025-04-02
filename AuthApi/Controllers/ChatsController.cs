@@ -252,6 +252,39 @@ namespace AuthApi.Controllers
 
             return Ok(new { ChatId = request.ChatId, AddedUsers = newParticipants.Select(u => u.userid) });
         }
+        [HttpDelete("delete-chat/{ChatId}")]
+        public async Task<IActionResult> DeleteChat(int ChatId, [FromServices] IHubContext<ChatHub> chatHub)
+        {
+            var chat = await _context.Chats.FindAsync(ChatId);
+            if (chat == null)
+            {
+                return NotFound("Чат не найден.");
+            }
+
+            var participants = await _context.ChatParticipants
+                .Where(cp => cp.chatid == ChatId)
+                .Select(cp => cp.userid)
+                .ToListAsync();
+            var messages = _context.Messagess.Where(m => m.chatid == ChatId);
+            _context.Messagess.RemoveRange(messages);
+
+            var chatParticipants = _context.ChatParticipants.Where(cp => cp.chatid == ChatId);
+            _context.ChatParticipants.RemoveRange(chatParticipants);
+
+            _context.Chats.Remove(chat);
+            await _context.SaveChangesAsync();
+
+            foreach (var userId in participants)
+            {
+                await chatHub.Clients.User(userId.ToString()).SendAsync("ChatDeleted", new
+                {
+                    ChatId,
+                    Message = "Чат был удалён"
+                });
+            }
+
+            return Ok(new { ChatId, Message = "Чат успешно удалён." });
+        }
 
 
 
