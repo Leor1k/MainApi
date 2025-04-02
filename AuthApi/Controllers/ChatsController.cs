@@ -115,35 +115,18 @@ namespace AuthApi.Controllers
 
             _context.Messagess.Add(message);
             await _context.SaveChangesAsync();
-            await chatHub.Clients.Group(request.ReceiverId.ToString())
-                .SendAsync("ReceiveMessage", message);
 
-            return Ok(message);
-        }
-
-        [HttpGet("get-messages/{UserId}/{FriendId}")]
-        public async Task<ActionResult> GetUsersList(int UserId, int FriendId)
-        {
-
-            var chat = await _context.Chats
-                .Join(_context.ChatParticipants, c => c.chatid, cp => cp.chatid, (c, cp) => new { Chat = c, Participant = cp })
-                .Where(c => c.Participant.userid == UserId || c.Participant.userid == FriendId)
-                .GroupBy(c => c.Chat.chatid)
-                .Where(g => g.Count() == 2 && g.All(p => p.Participant.userid == UserId || p.Participant.userid == FriendId))
-                .Select(g => g.First().Chat)
-                .FirstOrDefaultAsync();
-
-            if (chat == null)
-            {
-                return NotFound("Не найден приватный чат между указанными пользователями.");
-            }
-
-            var messages = await _context.Messagess
-                .Where(m => m.chatid == chat.chatid)
-                .OrderBy(m => m.createdat)
+            var participants = await _context.ChatParticipants
+                .Where(p => p.chatid == request.ChatId && p.userid != request.SenderId)
+                .Select(p => p.userid.ToString())
                 .ToListAsync();
 
-            return Ok(messages);
+            foreach (var participantId in participants)
+            {
+                await chatHub.Clients.Group(participantId).SendAsync("ReceiveMessage", message);
+            }
+
+            return Ok(message);
         }
 
         [HttpGet("get-chats/{UserId}")]
