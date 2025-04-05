@@ -185,10 +185,20 @@ namespace AuthApi.Controllers
             var messages = await _context.Messagess
                 .Where(m => m.chatid == chatId)
                 .OrderBy(m => m.createdat)
+                .Select(m => new
+                {
+                    m.messageid,
+                    m.chatid,
+                    m.senderid,
+                    SenderName = _context.Users.Where(u => u.user_id == m.senderid).Select(u => u.username).FirstOrDefault(),
+                    m.content,
+                    m.createdat
+                })
                 .ToListAsync();
 
             return Ok(messages);
         }
+
         [HttpGet("get-chat-participants/{chatId}")]
         public async Task<ActionResult> GetChatParticipants(int chatId)
         {
