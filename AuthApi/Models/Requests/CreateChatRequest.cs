@@ -19,6 +19,6 @@
     public class DeleteFromChatRequest
     {
         public int ChatId { get; set; }
-        public int UserID { get; set; }
+        public int[] UserID { get; set; }
     }
 }
