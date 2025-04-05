@@ -285,7 +285,18 @@ namespace AuthApi.Controllers
 
             return Ok(new { ChatId, Message = "Чат успешно удалён." });
         }
-
+        [HttpGet("get-creator-chat-ID/{chatId}")]
+        public async Task<IActionResult> GetCreatorChatID(int chatId)
+        {
+            var creatorId = await _context.ChatParticipants.
+                Where(c => c.chatid == chatId && c.role == "Создатель")
+                .Select(us=>us.userid).FirstOrDefaultAsync();
+            if (creatorId == 0)
+            {
+                return NotFound("Создателя чата не найдено");
+            }
+            return Ok(creatorId);
+        }
 
 
 
