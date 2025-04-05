@@ -14,6 +14,11 @@
     public class AddUserInChat
     {
         public int ChatId { get; set; }
-        public int[] UsersId { get; set;}
+        public int[] UsersId { get; set; }
+    }
+    public class DeleteFromChatRequest
+    {
+        public int ChatId { get; set; }
+        public int UserID { get; set; }
     }
 }

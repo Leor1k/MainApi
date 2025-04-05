@@ -297,8 +297,17 @@ namespace AuthApi.Controllers
             }
             return Ok(creatorId);
         }
-
-
-
+        [HttpDelete("delete-user-from-chat")]
+        public async Task<IActionResult> GetCreatorChatID([FromBody] DeleteFromChatRequest request)
+        {
+            var chat = await _context.ChatParticipants.Where(u=>u.userid == request.UserID && u.chatid == request.ChatId).FirstOrDefaultAsync();
+            if (chat == null)
+            {
+                return NotFound("Чата или пользователя не найдено");
+            }
+            _context.ChatParticipants.Remove(chat);
+            _context.SaveChanges();
+            return Ok("Пользователь успешно удалён из чата");
+        }
     }
 }
