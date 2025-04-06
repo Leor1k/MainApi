@@ -150,34 +150,34 @@ namespace AuthApi.Controllers
                 .ToListAsync();
 
             if (!friendships.Any())
-                return NotFound("Пользователя не найдено");
+                return NotFound("Пользователь не найден");
 
             _context.Friendships.RemoveRange(friendships);
             await _context.SaveChangesAsync();
 
-            var chatParticipants = await _context.ChatParticipants
-                .Where(cp => cp.userid == request.UserId || cp.userid == request.FriendId)
-                .ToListAsync();
+            var privateChat = await _context.Chats
+                .Join(_context.ChatParticipants, c => c.chatid, cp => cp.chatid, (c, cp) => new { Chat = c, Participant = cp })
+                .Where(x => x.Chat.chattype == "private" &&
+                           (x.Participant.userid == request.UserId || x.Participant.userid == request.FriendId))
+                .GroupBy(x => x.Chat.chatid)
+                .Where(g => g.Count() == 2)
+                .Select(g => g.First().Chat)
+                .FirstOrDefaultAsync();
 
-            if (chatParticipants.Any())
+            if (privateChat != null)
             {
-                _context.ChatParticipants.RemoveRange(chatParticipants);
-                await _context.SaveChangesAsync();
-            }
+                var participants = await _context.ChatParticipants
+                    .Where(cp => cp.chatid == privateChat.chatid)
+                    .ToListAsync();
 
-            var privateChats = await _context.Chats
-                .Where(c => c.chattype == "private" &&
-                            !_context.ChatParticipants.Any(cp => cp.chatid == c.chatid))
-                .ToListAsync();
-
-            if (privateChats.Any())
-            {
-                _context.Chats.RemoveRange(privateChats);
+                _context.ChatParticipants.RemoveRange(participants);
+                _context.Chats.Remove(privateChat);
                 await _context.SaveChangesAsync();
             }
 
             return Ok("Вы больше не друзья...");
         }
+
         [HttpGet("getPrivateChat/{UserId}/{FriendId}")]
         public async Task<ActionResult> getPrivateChat(int UserId, int FriendId)
         {
