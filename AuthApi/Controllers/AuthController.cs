@@ -22,6 +22,21 @@ namespace AuthApi.Controllers
             _context = context;
             _emailService = emailService;
         }
+        [HttpGet("ping")]
+        public async Task<IActionResult> CheckHealth()
+        {
+            try
+            {
+                await _context.Database.OpenConnectionAsync();
+                await _context.Database.CloseConnectionAsync();
+
+                return Ok(new { Status = "Healthy", Timestamp = DateTime.UtcNow });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Status = "Unhealthy", Error = ex.Message });
+            }
+        }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLoginRequest loginRequest)

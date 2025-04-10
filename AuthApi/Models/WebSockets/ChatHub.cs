@@ -5,11 +5,11 @@ public class ChatHub : Hub
 {
     public override async Task OnConnectedAsync()
     {
-        // Извлекаем UserId из query string
+        
         var userId = Context.GetHttpContext().Request.Query["userId"];
         if (!string.IsNullOrEmpty(userId))
         {
-            // Добавляем клиента в группу, соответствующую его UserId
+            
             await Groups.AddToGroupAsync(Context.ConnectionId, userId);
             Console.WriteLine($"Клиент {Context.ConnectionId} добавлен в группу {userId}");
         }
