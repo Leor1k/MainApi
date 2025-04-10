@@ -23,7 +23,7 @@ namespace AuthApi.Controllers
             _context = context;
             _emailService = emailService;
         }
-        [HttpPost("ping")]
+        [HttpGet("ping")]
         public async Task<IActionResult> CheckHealth()
         {
             var sw = Stopwatch.StartNew();
