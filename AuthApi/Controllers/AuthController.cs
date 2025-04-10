@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Diagnostics;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using AuthApi.Data;
@@ -25,16 +26,25 @@ namespace AuthApi.Controllers
         [HttpGet("ping")]
         public async Task<IActionResult> CheckHealth()
         {
+            var sw = Stopwatch.StartNew();
             try
             {
-                await _context.Database.OpenConnectionAsync();
-                await _context.Database.CloseConnectionAsync();
-
-                return Ok(new { Status = "Healthy", Timestamp = DateTime.UtcNow });
+                await _context.Database.ExecuteSqlRawAsync("SELECT 1");
+                sw.Stop();
+                return Ok(new
+                {
+                    Status = "Healthy",
+                    ResponseTimeMs = sw.ElapsedMilliseconds
+                });
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new { Status = "Unhealthy", Error = ex.Message });
+                return StatusCode(500, new
+                {
+                    Status = "Unhealthy",
+                    Error = ex.Message,
+                    ResponseTimeMs = sw.ElapsedMilliseconds
+                });
             }
         }
 
