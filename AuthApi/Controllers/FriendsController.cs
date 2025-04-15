@@ -194,6 +194,27 @@ namespace AuthApi.Controllers
 
             return NotFound("Приватный чат не найден между этими пользователями.");
         }
+        [HttpGet("getUsersParts")]
+        public async Task<ActionResult> GetUsersNames([FromQuery] List<int> userIds)
+        {
+            if (userIds == null || userIds.Count == 0)
+                return BadRequest("Список пользователей пуст.");
+
+            var users = await _context.Users
+                .Where(u => userIds.Contains(u.user_id))
+                .Select(u => new
+                {
+                    u.user_id,
+                    u.username
+                })
+                .ToListAsync();
+
+            if (users == null || users.Count == 0)
+                return NotFound("Пользователи не найдены.");
+
+            return Ok(users);
+        }
+
 
 
 
